@@ -46,7 +46,7 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 
 ### Diagram
 
-![OAuth Flow Diagram](https://prod-files-secure.s3.us-west-2.amazonaws.com/2d9b73ba-d7ac-4c52-9098-255492110137/b6626c59-c87e-43fd-aa13-6fdd9bad6c79/seq-daig-oauthflow.png)
+![OAuth Flow Diagram]()
 
 > **Note**: for **Sandbox** testing, you will need to create a dummy merchant account in the Purs **Sandbox**. Navigate to the URL listed in the Environment URLs table and create a dummy Purs merchant account.
 
@@ -79,7 +79,7 @@ There are 2 steps in this process highlighted with 🟩 green and 🟥 red color
 - 🟩 - Getting the Purs Checkout Widget URL.
 - 🟥 - Calling the `PursCheckoutWidget` method with the URL received from the above step.
 
-![Checkout Flow Diagram](https://prod-files-secure.s3.us-west-2.amazonaws.com/2d9b73ba-d7ac-4c52-9098-255492110137/4929e63a-c0c1-42aa-a47c-cfc0966de268/checkout-seq-flowdiag.png)
+![Checkout Flow Diagram]()
 
 ### 🟩 Purs Checkout Widget URL
 
@@ -278,7 +278,7 @@ const updateUI = () => {
 
 ## Demo
 
-https://drive.google.com/file/d/1N2S4PlQWNg51Ky0QmAD3r0qPg3cbSrc4/view?usp=sharing
+add video
 
 ## API Endpoints
 
