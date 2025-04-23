@@ -58,6 +58,7 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 - When clicked, this button should navigate to the `https://{OAUTH_URL}/oauth2/authorize` URL with the appropriate query parameters.
 - The merchant will be prompted to enter their Purs Merchant Portal login credentials.
 - Once they authenticate, they will be redirected to the **REDIRECT_URL** Cann-X provided Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
+- **Endpoint details for `/oauth2/authorize` - [here](#get-oauth2authorize)**
 - See the next section to understand what to do with the `code` that is provided by Purs as a query parameter attached to your **REDIRECT_URL**.
 
 ### Retrieve and Store Tokens
@@ -65,14 +66,17 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 - Extract the value of this `code` query parameter and make a `POST` request to Purs to exchange this short-lived `code` for OAuth tokens.
 - You will need the **CLIENT_ID** and **CLIENT_SECRET** which Purs has provided you.
 - Make sure to make this request from your backend where the **CLIENT_ID** and **CLIENT_SECRET** are stored securely.
+- **Endpoint details for `/oauth/token` - [here](#post-oauth2token)**
 
 ### Refresh Tokens
 
 - Since the `access_token` and `id_token` expire, you should refresh them with `refresh_token` to make valid requests.
+- **Endpoint details for `/oauth/token` (refresh) - [here](#post-oauth2token-refresh-token)**
 
 ### Revoke Tokens
 
 - This is to revoke the tokens for a particular merchant.
+- **Endpoint details for `/oauth/revoke` - [here](#post-oauth2revoke)**
 
 ## Checkout Flow
 
@@ -86,10 +90,11 @@ There are 2 steps in this process highlighted with 🟩 green and 🟥 red color
 ### 🟩 Purs Checkout Widget URL
 
 - Purs checkout widget is a way for Cann-X customers to make payments.
+- **Endpoint details to get the Purs Checkout Widget `/v1/transactions` - [here](#post-v1transactions)**
     
-    > **Note:** To make the request for checkout widget URL, you need `location_id`. This `location_id` comes from the Purs system and how to get the `location_id` for a merchant is explained in the Location ID section below.
+    > **Note:** To make the above request, you need `location_id`. This `location_id` comes from the Purs system and how to get the `location_id` for a merchant is explained [**here**](#location-id-of-merchant).
     
-    > **Note:** The request should be made from your backend, not directly from your frontend. This approach ensures that the tokens and their corresponding merchant mappings, which are stored in your backend, remain secure. Your frontend should make an API call to your backend with the `amount` and `location_id` as parameters. Your backend will then handle the call to the Purs API (`/v1/transactions`) using the valid tokens stored in your system.
+    > **Note:** The above request should be made from your backend, not directly from your frontend. This approach ensures that the tokens and their corresponding merchant mappings, which are stored in your backend, remain secure. Your frontend should make an API call to your backend with the `amount` and `location_id` as parameters. Your backend will then handle the call to the Purs API (`/v1/transactions`) using the valid tokens stored in your system.
 
 ### 🟥 PursCheckoutWidget method
 
@@ -204,7 +209,7 @@ button.addEventListener('click', initiateCheckout);
 
 Implement the logic to call the `PursCheckoutWidget.init` method with `url` and `onPaymentComplete` as parameters.
 
-- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟩 green section above.
+- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟩 [**green section**](#-purs-checkout-widget-url).
 - the `onPaymentComplete` expects a callback function (`updateUI`) defined on your end.
 
 ```javascript
@@ -230,7 +235,7 @@ const initiateCheckout = async () => {
 
 Implement the logic to get the checkout url in a function. (`createPaymentRequest`)
 
-- As mentioned above, your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
+- As mentioned [**here**](#-purs-checkout-widget-url), your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
 
 ```javascript
 const createPaymentRequest = async (amount, locationid) => {
@@ -272,16 +277,17 @@ const updateUI = () => {
 - During the onboarding process, when a merchant creates an account on the Purs Merchant Portal, they are required to add at least one location. Additional locations can also be added later through the portal.
 - To retrieve all locations associated with a particular merchant, use the `/v1/merchant` endpoint. This allows you to present the available locations (and other details) related to the merchant on your platform, enabling them to choose the location where they want to receive payments from your users.
 - Once the merchant selects a location, you will use the corresponding `location_id` in the request body as outlined in the previous section.
+- **Endpoint details to get the locations `/v1/merchant` - [here](#get-v1merchant)**
 
 ### Transaction Status
 
 - This is an optional but recommended step where you can make an additional API call to Purs to get the transaction status for a particular transaction.
-- The`transaction_id` received in the checkout URL response will be used to retrieve the status of that transaction.
+- The`transaction_id` received in the checkout URL [**response**](#post-v1transactions) will be used to retrieve the status of that transaction.
+- **Endpoint details to get transaction status `/v1/transactions/{transactionId}/status` - [here](#get-v1transactionstransactionidstatus)**
 
 ## Demo
 
 [Demo](https://drive.google.com/file/d/1N2S4PlQWNg51Ky0QmAD3r0qPg3cbSrc4/view?usp=sharing)
-
 
 
 ## API Endpoints
