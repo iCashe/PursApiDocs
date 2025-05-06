@@ -673,7 +673,7 @@ GET https://{BASE_URL}/v1/transactions/{transactionId}/status
 ```
 GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_key}&limit={limit}
 ```
-#### Note - `page_key` and `limit` are optional query params. For the first reuqest there won't be a `page_key` and if `limit` is not passed then the default value is 25.
+#### Note - `page_key` and `limit` are optional query params. For the first request there won't be a `page_key` and if `limit` is not passed then the default value is 25.
     
 - **Headers**
     
