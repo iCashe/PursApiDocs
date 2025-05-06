@@ -662,3 +662,55 @@ GET https://{BASE_URL}/v1/transactions/{transactionId}/status
     "message": "<message>"
 }
 ```
+
+## Upcoming APIs
+### **`GET /v1/transactions`**
+
+#### Request
+
+- **URL**
+    
+```
+GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_key}&limit={limit}
+```
+#### Note - `page_key` and `limit` are optional query params. For the first reuqest there won't be a `page_key` and if `limit` is not passed then the default value is 25.
+    
+- **Headers**
+    
+```javascript
+{
+    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+}
+```
+
+#### Response
+
+- Positive response
+    
+```javascript
+{
+  transactions: [{
+      transaction_id: "<transaction_id>",
+      status: "COMPLETED" | "PENDING" | "CANCELLED" | "REVERSED"
+     }, ...
+   ],
+  next_page_key: "<page_key>"
+}
+```
+    
+- Negative responses
+    
+| `status code` | `message` |
+| --- | --- |
+| 403 | Forbidden |
+| 401 | The bearer token is not valid. |
+| 500 | Internal server error |
+    
+```javascript
+{
+    "status_code": "<status_code>",
+    "message": "<message>"
+}
+```
+
