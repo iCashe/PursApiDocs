@@ -692,8 +692,11 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 {
   transactions: [{
       transaction_id: "<transaction_id>",
-      status: "COMPLETED" | "PENDING" | "CANCELLED" | "REVERSED"
-     }, ...
+      status: "COMPLETED" | "PENDING" | "CANCELLED" | "REVERSED",
+      ...
+     }, {
+	...
+    }
    ],
   next_page_key: "<page_key>"
 }
