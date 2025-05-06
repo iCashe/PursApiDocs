@@ -696,8 +696,7 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
       ...
      }, {
 	...
-    }
-   ],
+    }],
   next_page_key: "<page_key>"
 }
 ```
