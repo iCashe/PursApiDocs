@@ -37,7 +37,7 @@ There are two primary operations that the Cann-X platform will need to support:
 
 | Environment | **BASE_URL** | **OAUTH_URL** | Purs Checkout Widget URL (**CHECKOUT_URL**) | Purs Merchant Portal URL |
 | --- | --- | --- | --- | --- |
-| **Sandbox** | `sandbox-api.purs.digital` | `merchant-pool-domain-721205462502.auth.us-west-2.amazoncognito.com` | `staging.d2mlrmi9t2wpmo.amplifyapp.com/checkout/payment-widget` | `staging.d10xqo7vabitfl.amplifyapp.com` |
+| **Sandbox** | `sandbox-api.purs.digital` | `merchant-pool-domain-721205462502.auth.us-west-2.amazoncognito.com` | `staging.d2mlrmi9t2wpmo.amplifyapp.com/checkout/payment-widget` | `sandbox-merchants.purs.digital` |
 | **Production** | `api.purs.digital` | `merchant-pool-domain-719104550509.auth.us-west-2.amazoncognito.com` | `checkout.purs.digital.com/checkout/payment-widget` (currently inactive) | `merchants.purs.digital` |
 
 ## OAuth2 Flow
