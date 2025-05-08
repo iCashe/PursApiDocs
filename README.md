@@ -717,9 +717,10 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 
 ## Upcoming APIs Changes
 
+![RecurrentPayment](https://github.com/user-attachments/assets/48f1a958-7d13-4416-8f37-1837d8716d5d)
 
 
-![RecurrentPayment](https://github.com/user-attachments/assets/7bc4bdb3-707a-43f6-a61e-f9a10f5149b8)
+
 
 
 
