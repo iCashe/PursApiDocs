@@ -85,7 +85,7 @@ There are 2 steps in this process highlighted with 🟩 green and 🟥 red color
 - 🟩 - Getting the Purs Checkout Widget URL.
 - 🟥 - Calling the `PursCheckoutWidget` method with the URL received from the above step.
 
-![Checkout Flow Diagram](https://github.com/user-attachments/assets/bfd8c81a-2a02-4adf-aeda-ff975a2c582c)
+![Checkout Flow Diagram](https://github.com/user-attachments/assets/ed195761-2b56-44d9-894f-e4b918882544)
 
 ### 🟩 Purs Checkout Widget URL
 
