@@ -754,7 +754,6 @@ POST https://{BASE_URL}/v1/transactions
 {
     "url": "https://{CHECKOUT_URL}?tid=abcd1234",
     "transaction_id": "abcd1234"
-    "user_id": "user789" // Unique user's id to confirm future recurrent payment
 }
 ```
 
@@ -809,9 +808,7 @@ POST https://{BASE_URL}/v1/transactions
 
 ```javascript
 {
-    "url": "https://{CHECKOUT_URL}?tid=abcd1234",
     "transaction_id": "abcd1234"
-    "user_id": "user789" // Unique user's id to confirm future recurrent payment
 }
 ```
 
