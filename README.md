@@ -718,8 +718,9 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 ## Upcoming APIs Changes
 
 
+![RecurrentPayment](https://github.com/user-attachments/assets/8c4e1c52-378f-40f0-8e34-2b71d8ea43f0)
 
-![RecurrentPayment](https://github.com/user-attachments/assets/7bc4bdb3-707a-43f6-a61e-f9a10f5149b8)
+
 
 
 
@@ -802,7 +803,7 @@ POST https://{BASE_URL}/v1/transactions
 ```javascript
 {
     "type": "RECURRENT",
-    "amount": amount, // The amount in cents to be paid by the user  (Integer)
+    "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
     "user_id": <purs_user_id>, // Unique user's returned by Purs during subscription id to confirm recurrent payment
     "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
 }
@@ -822,7 +823,7 @@ POST https://{BASE_URL}/v1/transactions
 
 | `status code` | `message` |
 | --- | --- |
-| 400 | The amount value is not an integer, less than 0, or greater than 100000. |
+| 400 | The amount value is not an integer, non positive, or greater than 100000. |
 | 401 | The bearer token is not valid. |
 | 404 | Location not found. |
 | 500 | Internal server error |
