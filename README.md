@@ -717,6 +717,10 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 
 ## Upcoming APIs Changes
 
+
+![RecurrentPayment](https://github.com/user-attachments/assets/de80cfce-ef3f-4125-832d-26878d33065b)
+
+
 ### **`POST /v1/transactions`**
 
 #### Request for creating recurrent payment subscription
