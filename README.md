@@ -797,7 +797,7 @@ POST https://{BASE_URL}/v1/transactions
 {
     "type": "RECURRENT",
     "amount": amount, // The amount in cents to be paid by the user  (Integer)
-    "user_id": <purs_user_id> // Unique user's id to confirm recurrent payment
+    "user_id": <purs_user_id>, // Unique user's id to confirm recurrent payment
     "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
 }
 ```
