@@ -718,8 +718,7 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 ## Upcoming APIs Changes
 
 
-![RecurrentPayment](https://github.com/user-attachments/assets/8c4e1c52-378f-40f0-8e34-2b71d8ea43f0)
-
+![RecurrentPayment](https://github.com/user-attachments/assets/822e7988-3462-4d0b-8db3-aaf64e5d32f7)
 
 
 
@@ -804,7 +803,7 @@ POST https://{BASE_URL}/v1/transactions
 {
     "type": "RECURRENT",
     "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
-    "user_id": <purs_user_id>, // Unique user's returned by Purs during subscription id to confirm recurrent payment
+    "subsription_id": <purs_subsription_id>, // Unique ID returned by Purs during user subscription process to confirm recurrent payment
     "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
 }
 ```
