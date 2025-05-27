@@ -746,7 +746,7 @@ POST https://{BASE_URL}/v1/transactions
 
 ```javascript
 {
-    "type": "SUBSCRIPTION",
+    "type": "PAYMENT_SUBSCRIPTION",
     "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
     "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
 }
@@ -802,7 +802,7 @@ POST https://{BASE_URL}/v1/transactions
 
 ```javascript
 {
-    "type": "RECURRENT",
+    "type": "PAYMENT_RECURRENT",
     "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
     "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
 }
