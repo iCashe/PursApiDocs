@@ -759,7 +759,8 @@ POST https://{BASE_URL}/v1/transactions
 ```javascript
 {
     "url": "https://{CHECKOUT_URL}?tid=abcd1234",
-    "transaction_id": "abcd1234"
+    "transaction_id": "abcd1234",
+    "subsription-token": "user-subscription-1234"
 }
 ```
 
@@ -794,6 +795,7 @@ POST https://{BASE_URL}/v1/transactions
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+    "x-subsription-token": "<subsription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
 }
 ```
 
@@ -803,7 +805,6 @@ POST https://{BASE_URL}/v1/transactions
 {
     "type": "RECURRENT",
     "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
-    "subsription_id": <purs_subsription_id>, // Unique ID returned by Purs during user subscription process to confirm recurrent payment
     "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
 }
 ```
