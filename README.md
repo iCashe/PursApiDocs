@@ -760,7 +760,6 @@ POST https://{BASE_URL}/v1/transactions
 {
     "url": "https://{CHECKOUT_URL}?tid=abcd1234",
     "transaction_id": "abcd1234",
-    "subsription-token": "user-subscription-1234"
 }
 ```
 
