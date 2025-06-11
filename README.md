@@ -746,9 +746,9 @@ POST https://{BASE_URL}/v1/transactions
 
 ```javascript
 {
-    "type": "PAYMENT_SUBSCRIPTION",
     "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
-    "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
+    "location_id": <purs_location_id>, // The ID of the merchant location where the payment will be recorded (String)
+    "create_subscription": true // Subscribtion flag
 }
 ```
 
@@ -780,12 +780,15 @@ POST https://{BASE_URL}/v1/transactions
 ```
 
 
+## Upcoming APIs
+
+
 #### Request recurrent payment
 
 - **URL**
 
 ```
-POST https://{BASE_URL}/v1/transactions
+POST https://{BASE_URL}/v1/transactions/auto-approve
 ```
 
 - **Headers**
@@ -802,7 +805,6 @@ POST https://{BASE_URL}/v1/transactions
 
 ```javascript
 {
-    "type": "PAYMENT_RECURRENT",
     "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
     "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
 }
@@ -834,5 +836,60 @@ POST https://{BASE_URL}/v1/transactions
 }
 ```
 
+#### Check user's subscription
 
-## Upcoming APIs
+- **URL**
+
+```
+POST https://{BASE_URL}/v1/transactions/subscription-check
+```
+
+- **Headers**
+
+```javascript
+{
+    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+    "x-subsription-token": "<subsription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
+}
+```
+
+- **Body (JSON)**
+
+```javascript
+{
+    "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
+    "amount": amount, // Optional. Verifies that the user has at least this amount in their bank account
+}
+```
+
+#### Response
+
+- Positive response
+
+```javascript
+{
+    "subscription_id": "abcd1234",
+    "created_at_datetime": "2024-05-05T11:00:00.000Z",
+    "account_nickname": "User's account",
+    "account_last_four": "1234",
+    "amount_verified": true/false      // If the amount was passed in the request
+}
+```
+
+- Negative responses
+
+| `status code` | `message` |
+| --- | --- |
+| 401 | The bearer token is not valid. |
+| 404 | Subscription not found or canceled. |
+| 404 | User does not have active bank account. |
+| 500 | Internal server error |
+
+```javascript
+{
+    "status_code": "<status_code>",
+    "message": "<message>"
+}
+```
+
