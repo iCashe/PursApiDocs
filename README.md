@@ -296,23 +296,9 @@ const updateUI = () => {
 
 ## API Endpoints
 
-### **`GET /oauth2/authorize`**
+<details><summary><h2><b>OAuth2 Authorization</b></h2></summary>
 
-#### Request
-
-Here is an example of the "Connect with Purs" button:
-
-```html
-<!-- CLIENT_ID = "client123" -->
-<!-- REDIRECT_URL = https://merchants.cann-x.com/callback (this must be URL-encoded => https%3A%2F%2Fmerchants.cann-x.com%2Fcallback) -->
-<a href="https://{OAUTH_URL}/oauth2/authorize?
-					 response_type=code&
-					 client_id=client123&
-					 redirect_uri=https%3A%2F%2Fmerchants.cann-x.com%2Fcallback&
-					 scope=openid+profile+email+phone+PURS_API/TRANSACTIONS_READ+PURS_API/TRANSACTIONS_WRITE+PURS_API/MERCHANT_READ+PURS_API/SUBSCRIPTION_READ+PURS_API/SUBSCRIPTION_WRITE">
-	Connect with Purs
-</a>
-```
+- **URL**
 
 ```javascript
 // Put this URI in the "Connect with Purs" button
@@ -321,7 +307,7 @@ GET https://{OAUTH_URL}/oauth2/authorize?
 		client_id={CLIENT_ID}&
 		redirect_uri={REDIRECT_URL}& // this must be URL-encoded
 		state=abcdefg& // this is optional
-		scope=openid+profile+email+phone+PURS_API/TRANSACTIONS_READ+PURS_API/TRANSACTIONS_WRITE+PURS_API/MERCHANT_READ+PURS_API/SUBSCRIPTION_READ+PURS_API/SUBSCRIPTION_WRITE // leave as is
+		scope=openid+profile+email+phone+PURS_API/--- // add all required acoops
 ```
 
 | **Field** | **Type** | **Description** |
@@ -363,6 +349,7 @@ HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=unauthorized_client
 // If the requested scopes are unknown, malformed, or not valid.
 HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=invalid_scope
 ```
+</details>
 
 ### **`POST /oauth2/token`**
 
