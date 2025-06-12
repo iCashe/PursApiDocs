@@ -58,7 +58,7 @@ The process of linking a merchant account with **Purs** will ad to the standard 
 - When clicked, this button should navigate to the `https://{OAUTH_URL}/oauth2/authorize` URL with the appropriate query parameters.
 - The merchant will be prompted to enter their Purs Merchant Portal login credentials.
 - Once they authenticate, they will be redirected to the **REDIRECT_URL** Cann-X provided Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
-- **Endpoint details for `/oauth2/authorize` - [here](#get-oauth2authorize)**
+- **Endpoint details for `/oauth2/authorize` - [here](#OAuth2-Authorization)**
 - See the next section to understand what to do with the `code` that is provided by Purs as a query parameter attached to your **REDIRECT_URL**.
 
 ### Retrieve and Store Tokens
