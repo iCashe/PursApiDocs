@@ -456,7 +456,7 @@ refresh_token=<refresh_token>
 {
   "access_token": "new1example",
   "id_token": "new2example",
-  "expires_in": 86400 // expiry of access_token and refresh token, value in seconds
+  "expires_in": 86400 // expiry of access_token and id token, value in seconds
 }
 ```
 
