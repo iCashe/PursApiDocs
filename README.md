@@ -833,11 +833,11 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 ```
 </details>
 
-
+---
 
 ## Upcoming APIs
 
-### **`POST /v1/transactions/subscription-cancel`**
+<details><summary><h2><b>Cancel subscription</b></h2></summary>
 
 #### Cancel user's subscription
 
@@ -891,3 +891,4 @@ DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
     "message": "<message>"
 }
 ```
+</details>
