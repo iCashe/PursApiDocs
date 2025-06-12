@@ -500,9 +500,9 @@ A successful response contains an empty body
 </details>
 
 
-<details><summary><h2><b>New subscription request</b></h2></summary>
+<details><summary><h2><b>New subscription</b></h2></summary>
 
-#### Request for creating recurrent payment subscription
+#### Request for creating a new recurrent payment subscription
 
 - **URL**
 
@@ -559,7 +559,7 @@ POST https://{BASE_URL}/v1/transactions
 
 <details><summary><h2><b>Subscription verification</b></h2></summary>
 
-#### Check user's subscription
+#### Check user's subscription and account balance
 
 - **URL**
 
@@ -673,10 +673,11 @@ POST https://{BASE_URL}/v1/transactions/auto-approve
 ```
 </details>
 
+<details><summary><h2><b>Merchant </b></h2></summary>
 
 ### **`GET /v1/merchant`**
 
-#### Request
+#### Request for retrieving merchant's data
 
 - **URL**
 
@@ -730,10 +731,11 @@ GET https://{BASE_URL}/v1/merchant
     "message": "<message>"
 }
 ```
+</details>
 
-### **`GET /v1/transactions/{transactionId}/status`**
+<details><summary><h2><b>Transaction verification</b></h2></summary>
 
-#### Request
+#### Request for retrieving transaction's status
 
 - **URL**
 
@@ -776,10 +778,11 @@ GET https://{BASE_URL}/v1/transactions/{transactionId}/status
     "message": "<message>"
 }
 ```
+</details>
 
-### **`GET /v1/transactions`**
+<details><summary><h2><b>Location's transactions</b></h2></summary>
 
-#### Request
+#### Request for retrieving all location's transactions
 
 - **URL**
 
@@ -828,6 +831,7 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
     "message": "<message>"
 }
 ```
+</details>
 
 
 
