@@ -530,7 +530,7 @@ POST https://{BASE_URL}/v1/transactions
 ```javascript
 {
     "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
-    "location_id": <purs_location_id>, // The ID of the merchant location where the payment will be recorded (String)
+    "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
     "create_subscription": true // Subscription flag
 }
 ```
@@ -641,7 +641,7 @@ POST https://{BASE_URL}/v1/transactions/subscription-check
 
 ```javascript
 {
-    "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
+    "location_id": <purs_location_id> // The ID of the merchant location where the subscription was created (String)
     "amount": amount, // Optional. Verifies that the user has at least this amount in their bank account
 }
 ```
