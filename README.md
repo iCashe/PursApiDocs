@@ -80,12 +80,13 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 
 ## Checkout Flow
 
-There are 2 steps in this process highlighted with 🟩 green and 🟥 red color in the sequence diagram below.
+There are 2 steps in this process  in the sequence diagram below.
 
 - 🟩 - Getting the Purs Checkout Widget URL.
 - 🟥 - Calling the `PursCheckoutWidget` method with the URL received from the above step.
 
-![Checkout Flow Diagram](https://github.com/user-attachments/assets/ed195761-2b56-44d9-894f-e4b918882544)
+[Subscription](https://github.com/user-attachments/assets/ce4eab3d-1fd6-41ff-806f-6638844578e7)
+
 
 ### 🟩 Purs Checkout Widget URL
 
@@ -505,10 +506,6 @@ A successful response contains an empty body
 }
 ```
 
-
-![RecurrentPayment](https://github.com/user-attachments/assets/822e7988-3462-4d0b-8db3-aaf64e5d32f7)
-
-
 ### **`POST /v1/transactions`**
 
 #### Request for creating recurrent payment subscription
@@ -564,6 +561,9 @@ POST https://{BASE_URL}/v1/transactions
     "message": "<message>"
 }
 ```
+
+![Reccuring payment](https://github.com/user-attachments/assets/4362e4c2-4ea5-42c8-a7bb-a9daf279dfa7)
+
 
 #### Request for create recurrent payment
 
