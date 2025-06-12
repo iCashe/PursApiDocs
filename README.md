@@ -83,13 +83,13 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 
 There are 2 steps in this process  in the sequence diagram below.
 
-- ⬜ - Getting the Purs Checkout Widget URL.
+- 🟧 - Getting the Purs Checkout Widget URL.
 - 🟩 - Calling the `PursCheckoutWidget` method with the URL received from the above step.
 
-![Subscription](https://github.com/user-attachments/assets/ce4eab3d-1fd6-41ff-806f-6638844578e7)
+![Subscription](https://github.com/user-attachments/assets/a73a1d67-665e-4b8b-97c6-6845c85e82e1)
 
 
-### ⬜ Purs Checkout Widget URL
+### 🟧 Purs Checkout Widget URL
 
 - Purs checkout widget is a way for Cann-X customers to make payments.
 - **Endpoint details to get the Purs Checkout Widget `/v1/transactions` - [here](#post-v1transactions)**
