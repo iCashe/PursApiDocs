@@ -82,13 +82,13 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 
 There are 2 steps in this process  in the sequence diagram below.
 
-- 🟩 - Getting the Purs Checkout Widget URL.
-- 🟥 - Calling the `PursCheckoutWidget` method with the URL received from the above step.
+- ⬜ - Getting the Purs Checkout Widget URL.
+- 🟩 - Calling the `PursCheckoutWidget` method with the URL received from the above step.
 
 ![Subscription](https://github.com/user-attachments/assets/ce4eab3d-1fd6-41ff-806f-6638844578e7)
 
 
-### 🟩 Purs Checkout Widget URL
+### ⬜ Purs Checkout Widget URL
 
 - Purs checkout widget is a way for Cann-X customers to make payments.
 - **Endpoint details to get the Purs Checkout Widget `/v1/transactions` - [here](#post-v1transactions)**
@@ -97,7 +97,7 @@ There are 2 steps in this process  in the sequence diagram below.
 
     > **Note:** The above request should be made from your backend, not directly from your frontend. This approach ensures that the tokens and their corresponding merchant mappings, which are stored in your backend, remain secure. Your frontend should make an API call to your backend with the `amount` and `location_id` as parameters. Your backend will then handle the call to the Purs API (`/v1/transactions`) using the valid tokens stored in your system.
 
-### 🟥 PursCheckoutWidget method
+### 🟩 PursCheckoutWidget method
 
 - Below is code sample to integrate the Purs checkout widget in your website.
 
