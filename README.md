@@ -562,9 +562,6 @@ POST https://{BASE_URL}/v1/transactions
 }
 ```
 
-![Reccuring payment](https://github.com/user-attachments/assets/4362e4c2-4ea5-42c8-a7bb-a9daf279dfa7)
-
-
 #### Request for create recurrent payment
 
 - **URL**
