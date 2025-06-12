@@ -85,7 +85,7 @@ There are 2 steps in this process  in the sequence diagram below.
 - 🟩 - Getting the Purs Checkout Widget URL.
 - 🟥 - Calling the `PursCheckoutWidget` method with the URL received from the above step.
 
-[Subscription](https://github.com/user-attachments/assets/ce4eab3d-1fd6-41ff-806f-6638844578e7)
+![Subscription](https://github.com/user-attachments/assets/ce4eab3d-1fd6-41ff-806f-6638844578e7)
 
 
 ### 🟩 Purs Checkout Widget URL
