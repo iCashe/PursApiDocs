@@ -24,7 +24,6 @@
 There are two primary operations that the Cann-X platform will need to support:
 
 <details><summary><h1><b>OAuth2 Flow</b></h1></summary>
-### **OAuth2 Flow**
 
 - This allows merchants to connect their Purs Merchant Account with Cann-X. Once connected, this merchant can accept Purs payments on the Cann-X platform. This operation only needs to be completed once for each Cann-X merchant.
 
@@ -80,7 +79,7 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 - **Endpoint details for `/oauth/revoke` - [here](#post-oauth2revoke)**
 </details>
 
-## Checkout Flow
+<details><summary><h1><b>Checkout Flow</b></h1></summary>
 
 There are 2 steps in this process  in the sequence diagram below.
 
@@ -288,9 +287,11 @@ const updateUI = () => {
 - The`transaction_id` received in the checkout URL [**response**](#post-v1transactions) will be used to retrieve the status of that transaction.
 - **Endpoint details to get transaction status `/v1/transactions/{transactionId}/status` - [here](#get-v1transactionstransactionidstatus)**
 
+</details>
+
 ## Demo
 
-[Demo](https://drive.google.com/file/d/1N2S4PlQWNg51Ky0QmAD3r0qPg3cbSrc4/view?usp=sharing)
+![Demo](https://drive.google.com/file/d/1N2S4PlQWNg51Ky0QmAD3r0qPg3cbSrc4/view?usp=sharing)
 
 
 ## API Endpoints
