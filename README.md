@@ -66,17 +66,17 @@ The process of linking a merchant account with **Purs** will ad to the standard 
 - Extract the value of this `code` query parameter and make a `POST` request to Purs to exchange this short-lived `code` for OAuth tokens.
 - You will need the **CLIENT_ID** and **CLIENT_SECRET** which Purs has provided you.
 - Make sure to make this request from your backend where the **CLIENT_ID** and **CLIENT_SECRET** are stored securely.
-- **Endpoint details for `/oauth/token` - [here](#post-oauth2token)**
+- **Endpoint details for `/oauth/token` - [here](#Get-new-tokens)**
 
 ### Refresh Tokens
 
 - Since the `access_token` and `id_token` expire, you should refresh them with `refresh_token` to make valid requests.
-- **Endpoint details for `/oauth/token` (refresh) - [here](#post-oauth2token-refresh-token)**
+- **Endpoint details for `/oauth/token` (refresh) - [here](#Redresh-tokens)**
 
 ### Revoke Tokens
 
 - This is to revoke the tokens for a particular merchant.
-- **Endpoint details for `/oauth/revoke` - [here](#post-oauth2revoke)**
+- **Endpoint details for `/oauth/revoke` - [here](#Revoke-tokens)**
 </details>
 
 <details><summary><h1><b>Checkout Flow</b></h1></summary>
@@ -93,7 +93,7 @@ There are 2 steps in this process  in the sequence diagram below.
 ### 🟧 Purs Checkout Widget URL
 
 - Purs checkout widget is a way for Cann-X customers to make payments.
-- **Endpoint details to get the Purs Checkout Widget `/v1/transactions` - [here](#post-v1transactions)**
+- **Endpoint details to get the Purs Checkout Widget `/v1/transactions` - [here](#New-subscription)**
 
     > **Note:** To make the above request, you need `location_id`. This `location_id` comes from the Purs system and how to get the `location_id` for a merchant is explained [**here**](#location-id-of-merchant).
 
@@ -290,13 +290,13 @@ const updateUI = () => {
 - During the onboarding process, when a merchant creates an account on the Purs Merchant Portal, they are required to add at least one location. Additional locations can also be added later through the portal.
 - To retrieve all locations associated with a particular merchant, use the `/v1/merchant` endpoint. This allows you to present the available locations (and other details) related to the merchant on your platform, enabling them to choose the location where they want to receive payments from your users.
 - Once the merchant selects a location, you will use the corresponding `location_id` in the request body as outlined in the previous section.
-- **Endpoint details to get the locations `/v1/merchant` - [here](#get-v1merchant)**
+- **Endpoint details to get the locations `/v1/merchant` - [here](#Merchant)**
 
 ### Transaction Status
 
 - This is an optional but recommended step where you can make an additional API call to Purs to get the transaction status for a particular transaction.
 - The`transaction_id` received in the checkout URL [**response**](#post-v1transactions) will be used to retrieve the status of that transaction.
-- **Endpoint details to get transaction status `/v1/transactions/{transactionId}/status` - [here](#get-v1transactionstransactionidstatus)**
+- **Endpoint details to get transaction status `/v1/transactions/{transactionId}/status` - [here](#Transaction-verification)**
 
 </details>
 
