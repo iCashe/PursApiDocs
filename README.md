@@ -578,7 +578,7 @@ POST https://{BASE_URL}/v1/transactions/auto-approve
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subsription-token": "<subsription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
+    "x-subscription-token": "<subscription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
 }
 ```
 
@@ -633,7 +633,7 @@ POST https://{BASE_URL}/v1/transactions/subscription-check
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subsription-token": "<subsription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
+    "x-subscription-token": "<subscription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
 }
 ```
 
@@ -843,7 +843,7 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 - **URL**
 
 ```
-POST https://{BASE_URL}/v1/transactions/subscription-cancel
+DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
 ```
 
 - **Headers**
@@ -852,7 +852,7 @@ POST https://{BASE_URL}/v1/transactions/subscription-cancel
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subsription-token": "<subsription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
+    "x-subscription-token": "<subscription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
 }
 ```
 
