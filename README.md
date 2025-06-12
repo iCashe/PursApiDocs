@@ -42,7 +42,7 @@ There are two primary operations that the Cann-X platform will need to support:
 
 ## OAuth2 Flow
 
-The process of linking a merchant account with **Purs** will adhere to the standard **OAuth2** authentication protocol.
+The process of linking a merchant account with **Purs** will ad to the standard **OAuth2** authentication protocol.
 
 ### Diagram
 
@@ -54,7 +54,7 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 
 ### Initiate OAuth2 Authorization
 
-- To connect a seller's Purs Merchant Account with their Cann-X seller account, Cann-X will need to have a "Connect with Purs" button (likely somewhere in the admin portal for your merchants).
+- To connect a seller's Purs Merchant Account with their Cann-X seller account, Cann-X will need to have a "Connect with Purs" button (likely somew in the admin portal for your merchants).
 - When clicked, this button should navigate to the `https://{OAUTH_URL}/oauth2/authorize` URL with the appropriate query parameters.
 - The merchant will be prompted to enter their Purs Merchant Portal login credentials.
 - Once they authenticate, they will be redirected to the **REDIRECT_URL** Cann-X provided Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
@@ -86,7 +86,8 @@ There are 2 steps in this process  in the sequence diagram below.
 - 🟧 - Getting the Purs Checkout Widget URL.
 - 🟩 - Calling the `PursCheckoutWidget` method with the URL received from the above step.
 
-![Subscription](https://github.com/user-attachments/assets/0d26eee2-3911-4a84-a7bf-89d4e62c12fc)
+![Subscription](https://github.com/user-attachments/assets/4680586b-3317-47b1-b877-3115c03e1221)
+
 
 
 ### 🟧 Purs Checkout Widget URL
