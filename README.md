@@ -23,6 +23,7 @@
 
 There are two primary operations that the Cann-X platform will need to support:
 
+<details><summary><h1><b>OAuth2 Flow</b></h1></summary>
 ### **OAuth2 Flow**
 
 - This allows merchants to connect their Purs Merchant Account with Cann-X. Once connected, this merchant can accept Purs payments on the Cann-X platform. This operation only needs to be completed once for each Cann-X merchant.
@@ -77,6 +78,7 @@ The process of linking a merchant account with **Purs** will adhere to the stand
 
 - This is to revoke the tokens for a particular merchant.
 - **Endpoint details for `/oauth/revoke` - [here](#post-oauth2revoke)**
+</details>
 
 ## Checkout Flow
 
