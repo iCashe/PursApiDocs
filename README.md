@@ -317,7 +317,7 @@ GET https://{OAUTH_URL}/oauth2/authorize?
 		client_id={CLIENT_ID}&
 		redirect_uri={REDIRECT_URL}& // this must be URL-encoded
 		state=abcdefg& // this is optional
-		scope=openid+profile+email+phone+PURS_API/--- // add all required acoops
+		scope=openid+profile+email+phone+PURS_API/--- // add all required scopes
 ```
 
 | **Field** | **Type** | **Description** |
