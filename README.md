@@ -500,7 +500,7 @@ A successful response contains an empty body
 </details>
 
 
-### **`POST /v1/transactions`**
+<details><summary><h2><b>New subscription request</b></h2></summary>
 
 #### Request for creating recurrent payment subscription
 
@@ -555,63 +555,9 @@ POST https://{BASE_URL}/v1/transactions
     "message": "<message>"
 }
 ```
+</details>
 
-### **`POST /v1/transactions/auto-approve`**
-
-#### Request for create recurrent payment
-
-- **URL**
-
-```
-POST https://{BASE_URL}/v1/transactions/auto-approve
-```
-
-- **Headers**
-
-```javascript
-{
-    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
-    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subscription-token": "<subscription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
-}
-```
-
-- **Body (JSON)**
-
-```javascript
-{
-    "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
-    "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
-}
-```
-
-#### Response
-
-- Positive response
-
-```javascript
-{
-    "transaction_id": "abcd1234"
-}
-```
-
-- Negative responses
-
-| `status code` | `message` |
-| --- | --- |
-| 400 | The amount value is not an integer, non positive, or greater than 100000. |
-| 401 | The bearer token is not valid. |
-| 404 | Location not found. |
-| 500 | Internal server error |
-
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
-
-### **`POST /v1/transactions/subscription-check`**
+<details><summary><h2><b>Subscription verification</b></h2></summary>
 
 #### Check user's subscription
 
@@ -669,6 +615,63 @@ POST https://{BASE_URL}/v1/transactions/subscription-check
     "message": "<message>"
 }
 ```
+</details>
+
+<details><summary><h2><b>New recurring payment</b></h2></summary>
+
+#### Request for creating recurrent payment
+
+- **URL**
+
+```
+POST https://{BASE_URL}/v1/transactions/auto-approve
+```
+
+- **Headers**
+
+```javascript
+{
+    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+    "x-subscription-token": "<subscription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
+}
+```
+
+- **Body (JSON)**
+
+```javascript
+{
+    "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
+    "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
+}
+```
+
+#### Response
+
+- Positive response
+
+```javascript
+{
+    "transaction_id": "abcd1234"
+}
+```
+
+- Negative responses
+
+| `status code` | `message` |
+| --- | --- |
+| 400 | The amount value is not an integer, non positive, or greater than 100000. |
+| 401 | The bearer token is not valid. |
+| 404 | Location not found. |
+| 500 | Internal server error |
+
+```javascript
+{
+    "status_code": "<status_code>",
+    "message": "<message>"
+}
+```
+</details>
 
 
 ### **`GET /v1/merchant`**
