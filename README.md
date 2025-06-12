@@ -15,7 +15,7 @@
 
 ### **REDIRECT_URL**
 
-- You will need to provide Purs with a callback URL (referred to as **REDIRECT_URL**) which you own. Purs will redirect authenticated merchants to this **REDIRECT_URL** along with additional query parameter called `code`. The usage of this `code` is explained in the OAuth2 Flow section.
+- You will need to provide Purs with a callback URL (referred to as **REDIRECT_URL**) which you own. Purs will redirect authenticated merchants to this **REDIRECT_URL** along with additional query parameter called `code`. The usage of this `code` is explained in the OAuth2 Flow section. 
 
     > **Example**: If your merchants portal URL is `https://merchants.cann-x.com` then the REDIRECT_URL could be `https://merchants.cann-x.com/callback`
 
@@ -167,7 +167,7 @@ const initiateCheckout = async () => {
                 console.log('Payment completed!', paymentData);
                 const subscriptionToken = paymentData?.subscriptionToken;
 
-                updateUI(); // Update UI is a function that you have to implement which is called when the payment is completed by the checkout widget.
+                updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget to update any UI changes.
 			}
         });
     }
@@ -231,7 +231,6 @@ const initiateCheckout = async () => {
         PursCheckoutWidget.init({
             url: checkoutUrl,
             onPaymentComplete: (paymentData) => {
-                console.log('Payment completed!', paymentData);
                 const subscriptionToken = paymentData?.subscriptionToken;
 
                 updateUI(); // Update UI is a function that you have to implement which is called when the payment is completed by the checkout widget.
