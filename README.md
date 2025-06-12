@@ -578,7 +578,7 @@ POST https://{BASE_URL}/v1/transactions/subscription-check
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subscription-token": "<subscription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
+    "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
 }
 ```
 
@@ -597,7 +597,6 @@ POST https://{BASE_URL}/v1/transactions/subscription-check
 
 ```javascript
 {
-    "subscription_id": "abcd1234",
     "created_at_datetime": "2024-05-05T11:00:00.000Z",
     "account_nickname": "User's account",
     "account_last_four": "1234",
@@ -638,7 +637,7 @@ POST https://{BASE_URL}/v1/transactions/auto-approve
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subscription-token": "<subscription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
+    "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
 }
 ```
 
@@ -858,7 +857,7 @@ DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subscription-token": "<subscription_id>" // Unique ID returned by Purs during user subscription process to confirm recurrent payment
+    "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
 }
 ```
 
@@ -876,7 +875,6 @@ DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
 
 ```javascript
 {
-    "subscription_id": "abcd1234",
     "created_at_datetime": "2024-05-05T11:00:00.000Z",
     "canceled_at_datetime": "2024-06-06T00:00:00.000Z"
 }
