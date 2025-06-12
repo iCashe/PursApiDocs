@@ -229,7 +229,12 @@ const initiateCheckout = async () => {
         //this is the main method to initiate the Purs Checkout Widget
         PursCheckoutWidget.init({
             url: checkoutUrl,
-            onPaymentComplete: updateUI // updateUI is a function that you have to implement which is called when the payment is completed by the checkout widget. This is provided so you could update the UI accordingly.
+            onPaymentComplete: (paymentData) => {
+                console.log('Payment completed!', paymentData);
+                const subscriptionToken = paymentData?.subscriptionToken;
+
+                updateUI(); // Update UI is a function that you have to implement which is called when the payment is completed by the checkout widget.
+			}
         });
     }
     catch (error) {
