@@ -136,7 +136,7 @@ button.addEventListener('click', initiateCheckout);
 
 Implement the logic to call the `PursCheckoutWidget.init` method with `url` and `onPaymentComplete` as parameters.
 
-- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟩 [**green section**](#-purs-checkout-widget-url).
+- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟧 [**green section**](#-purs-checkout-widget-url).
 - the `onPaymentComplete` expects a callback function (`updateUI`) defined on your end.
 
 ```javascript
@@ -148,9 +148,9 @@ const initiateCheckout = async () => {
 
         //this is the main method to initiate the Purs Checkout Widget
         PursCheckoutWidget.init({
-            url: checkoutUrl,
+            url: checkoutUrl&email=`user-email-id`, // email is an optional query param passed so user doesn't have to again enter their email in Purs checkout widget
             onPaymentComplete: (paymentData) => {
-                const subscriptionToken = paymentData?.subscriptionToken;
+                const subscription_token = paymentData?.subscriptionToken; // the subscriptionToken is an optional field returned if you pass `create_subscription`: true
 
                 updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget on update any UI changes on your end.
 			}
@@ -263,10 +263,10 @@ const initiateCheckout = async () => {
 
         //this is the main method to initiate the Purs Checkout Widget
         PursCheckoutWidget.init({
-            url: checkoutUrl,
+            url: checkoutUrl&email=`user-email-id`, // email is an optional query param passed so user doesn't have to again enter their email in Purs checkout widget
             onPaymentComplete: (paymentData) => {
                 console.log('Payment completed!', paymentData);
-                const subscriptionToken = paymentData?.subscriptionToken;
+                const subscription_token = paymentData?.subscriptionToken; // the subscriptionToken is a optional field returned if you pass `create_subscription`: true
 
                 updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget to update any UI changes on your end.
 			}
