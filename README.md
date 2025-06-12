@@ -505,6 +505,10 @@ A successful response contains an empty body
 }
 ```
 
+
+![RecurrentPayment](https://github.com/user-attachments/assets/822e7988-3462-4d0b-8db3-aaf64e5d32f7)
+
+
 ### **`POST /v1/transactions`**
 
 #### Request for creating recurrent payment subscription
@@ -828,17 +832,8 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 ```
 
 
-![RecurrentPayment](https://github.com/user-attachments/assets/822e7988-3462-4d0b-8db3-aaf64e5d32f7)
-
-
-
-
-
-
 
 ## Upcoming APIs
-
-
 
 #### Cancel user's subscription
 
