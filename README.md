@@ -291,8 +291,8 @@ const updateUI = () => {
 
 ## Demo
 
-![Demo](https://drive.google.com/file/d/1N2S4PlQWNg51Ky0QmAD3r0qPg3cbSrc4/view?usp=sharing)
-
+[![Demo](https://github.com/user-attachments/assets/2bbbfbf5-6720-42bb-89d0-f34c43d059f9)](https://drive.google.com/file/d/1N2S4PlQWNg51Ky0QmAD3r0qPg3cbSrc4/view?usp=sharing
+)
 
 ## API Endpoints
 
