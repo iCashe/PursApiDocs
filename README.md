@@ -562,6 +562,8 @@ POST https://{BASE_URL}/v1/transactions
 }
 ```
 
+### **`POST /v1/transactions/auto-approve`**
+
 #### Request for create recurrent payment
 
 - **URL**
@@ -614,6 +616,8 @@ POST https://{BASE_URL}/v1/transactions/auto-approve
     "message": "<message>"
 }
 ```
+
+### **`POST /v1/transactions/subscription-check`**
 
 #### Check user's subscription
 
@@ -831,6 +835,8 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 
 
 ## Upcoming APIs
+
+### **`POST /v1/transactions/subscription-cancel`**
 
 #### Cancel user's subscription
 
