@@ -860,7 +860,7 @@ POST https://{BASE_URL}/v1/transactions/subscription-cancel
 
 ```javascript
 {
-    "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
+    "location_id": <purs_location_id> // The ID of the merchant location where the subscription was created (String)
 }
 ```
 
