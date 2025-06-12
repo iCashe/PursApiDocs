@@ -117,7 +117,7 @@ There are 2 steps in this process  in the sequence diagram below.
     <!-- add this button on your checkout page  -->
     <button id="purs-checkout-button">Pay with Purs</button>
 
-    <script src="https://purs-test-cdn.s3.us-west-2.amazonaws.com/index.js"></script>
+    <script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/purs-checkout.min.js"></script>
     <script src="./index.js" type="module"></script>
 
 </body>
