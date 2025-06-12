@@ -351,9 +351,7 @@ HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=invalid_scope
 ```
 </details>
 
-### **`POST /oauth2/token`**
-
-#### Request
+<details><summary><h2><b>Get new tokens</b></h2></summary>
 
 - **URL**
 
@@ -414,10 +412,9 @@ const base64Encode = btoa(authToken); // use this value in the Authorization hea
 > **Note**: The `access_token` and `id_token` has expiry duration of 1 day (86400 secs) and the `refresh_token` has expiry duration of 10 years.
 
 > **Note**: Since the `access_token` and `id_token` expire, you can either run a daily cron job to refresh the tokens **OR** during a request call, check the expiry of tokens with the help of `expires_in` key and if the tokens are expired, refresh them before making the request call.
+</details>
 
-### **`POST /oauth2/token` (refresh token)**
-
-#### Request
+<details><summary><h2><b>Refresh tokens</b></h2></summary>
 
 - **URL**
 
@@ -460,10 +457,9 @@ refresh_token=<refresh_token>
   "error":"invalid_request"
 }
 ```
+</details>
 
-### **`POST /oauth2/revoke`**
-
-#### Request
+<details><summary><h2><b>Revoke tokens</b></h2></summary>
 
 - **URL**
 
@@ -501,6 +497,8 @@ A successful response contains an empty body
   "error":"invalid_request|unsupported_token_type|invalid_client"
 }
 ```
+</details>
+
 
 ### **`POST /v1/transactions`**
 
