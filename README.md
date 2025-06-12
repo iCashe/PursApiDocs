@@ -103,6 +103,107 @@ There are 2 steps in this process  in the sequence diagram below.
 
 - Below is code sample to integrate the Purs checkout widget in your website.
 
+**Step 1**
+
+Add the Purs checkout CDN into your script tag
+
+```html
+<script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/purs-checkout.min.js"></script>
+```
+
+**Step 2**
+
+Add a "Pay with Purs button" on your page.
+
+```html
+<button id="purs-checkout-button">
+    Pay with Purs
+</button>
+```
+
+> 👍 **Recommended**: Add the Purs logo to this button. [Link](https://purs-test-cdn.s3.us-west-2.amazonaws.com/connect-with-purs.png)
+
+**Step 3**
+
+Implement the logic to call a function (`initateCheckout`) which initiates the checkout flow on a button click.
+
+```javascript
+const button = document.getElementById('purs-checkout-button');
+button.addEventListener('click', initiateCheckout);
+```
+
+**Step 4**
+
+Implement the logic to call the `PursCheckoutWidget.init` method with `url` and `onPaymentComplete` as parameters.
+
+- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟩 [**green section**](#-purs-checkout-widget-url).
+- the `onPaymentComplete` expects a callback function (`updateUI`) defined on your end.
+
+```javascript
+const initiateCheckout = async () => {
+    try {
+        const amount = 2000 // amount value in cents
+        const response = await createPaymentRequest(amount, 'purs-location-id');
+        const checkoutUrl = response
+
+        //this is the main method to initiate the Purs Checkout Widget
+        PursCheckoutWidget.init({
+            url: checkoutUrl,
+            onPaymentComplete: (paymentData) => {
+                const subscriptionToken = paymentData?.subscriptionToken;
+
+                updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget on update any UI changes on your end.
+			}
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+```
+
+**Step 5**
+
+Implement the logic to get the checkout url in a function. (`createPaymentRequest`)
+
+- As mentioned [**here**](#-purs-checkout-widget-url), your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
+
+```javascript
+const createPaymentRequest = async (amount, locationid) => {
+    const response = await fetch('www.your-backend-api.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            amount: amount,
+            location_id: locationid
+        })
+    });
+    if (!response.ok) {
+        throw new Error('failed to create payment')
+    }
+    return response.json()
+}
+```
+
+**Step 6**
+
+Implement the logic for a callback function (`updateUI`) to handle any UI changes after a successful payment.
+
+```javascript
+const updateUI = () => {
+    const button = document.getElementById('purs-checkout-button');
+    // Disable the button
+    button.disabled = true;
+    // make necessary UI changes according to your needs
+};
+```
+
+> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onPaymentComplete` are required.
+
+- Everything combined
+
 **HTML**
 
 ```html
@@ -167,7 +268,7 @@ const initiateCheckout = async () => {
                 console.log('Payment completed!', paymentData);
                 const subscriptionToken = paymentData?.subscriptionToken;
 
-                updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget to update any UI changes.
+                updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget to update any UI changes on your end.
 			}
         });
     }
@@ -184,104 +285,6 @@ button.addEventListener('click', initiateCheckout); // call the initiateCheckout
 
 > **Note:** The naming of functions in the above code sample is for illustration purpose only. You can change it accordingly. Just make sure the core logic remains same and the `PursCheckoutWidget.init` method receives the `url` and `onPaymentComplete` parameters.
 
-**Step 1**
-
-Add the Purs checkout CDN into your script tag
-
-```html
-<script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/purs-checkout.min.js"></script>
-```
-
-**Step 2**
-
-Add a "Pay with Purs button" on your page.
-
-```html
-<button id="purs-checkout-button">
-    Pay with Purs
-</button>
-```
-
-> 👍 **Recommended**: Add the Purs logo to this button. [Link](https://purs-test-cdn.s3.us-west-2.amazonaws.com/connect-with-purs.png)
-
-**Step 3**
-
-Implement the logic to call a function (`initateCheckout`) which initiates the checkout flow on a button click.
-
-```javascript
-const button = document.getElementById('purs-checkout-button');
-button.addEventListener('click', initiateCheckout);
-```
-
-**Step 4**
-
-Implement the logic to call the `PursCheckoutWidget.init` method with `url` and `onPaymentComplete` as parameters.
-
-- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟩 [**green section**](#-purs-checkout-widget-url).
-- the `onPaymentComplete` expects a callback function (`updateUI`) defined on your end.
-
-```javascript
-const initiateCheckout = async () => {
-    try {
-        const amount = 2000 // amount value in cents
-        const response = await createPaymentRequest(amount, 'purs-location-id');
-        const checkoutUrl = response
-
-        //this is the main method to initiate the Purs Checkout Widget
-        PursCheckoutWidget.init({
-            url: checkoutUrl,
-            onPaymentComplete: (paymentData) => {
-                const subscriptionToken = paymentData?.subscriptionToken;
-
-                updateUI(); // Update UI is a function that you have to implement which is called when the payment is completed by the checkout widget.
-			}
-        });
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
-```
-
-**Step 5**
-
-Implement the logic to get the checkout url in a function. (`createPaymentRequest`)
-
-- As mentioned [**here**](#-purs-checkout-widget-url), your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
-
-```javascript
-const createPaymentRequest = async (amount, locationid) => {
-    const response = await fetch('www.your-backend-api.com', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            amount: amount,
-            location_id: locationid
-        })
-    });
-    if (!response.ok) {
-        throw new Error('failed to create payment')
-    }
-    return response.json()
-}
-```
-
-**Step 6**
-
-Implement the logic for a callback function (`updateUI`) to handle any UI changes after a successful payment.
-
-```javascript
-const updateUI = () => {
-    const button = document.getElementById('purs-checkout-button');
-    // Disable the button
-    button.disabled = true;
-    // make necessary UI changes according to your needs
-};
-```
-
-> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onPaymentComplete` are required.
 
 ### Location ID of merchant
 
