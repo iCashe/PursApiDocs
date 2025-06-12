@@ -405,7 +405,7 @@ const base64Encode = btoa(authToken); // use this value in the Authorization hea
   "access_token": "eyJra1example",
   "id_token": "eyJra2example",
   "refresh_token": "eyJj3example",
-  "expires_in": 86400 // expiry of access_token and refresh token, value in seconds
+  "expires_in": 86400 // expiry of access_token and id token, value in seconds
 }
 ```
 
