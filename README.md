@@ -296,7 +296,7 @@ const updateUI = () => {
 
 ## API Endpoints
 
-<details><summary><h2><b>OAuth2 Authorization</b></h2></summary>
+<details><summary><h3><b>OAuth2 Authorization</b></h3></summary>
 
 - **URL**
 
@@ -351,7 +351,7 @@ HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=invalid_scope
 ```
 </details>
 
-<details><summary><h2><b>Get new tokens</b></h2></summary>
+<details><summary><h3><b>Get new tokens</b></h3></summary>
 
 - **URL**
 
@@ -414,7 +414,7 @@ const base64Encode = btoa(authToken); // use this value in the Authorization hea
 > **Note**: Since the `access_token` and `id_token` expire, you can either run a daily cron job to refresh the tokens **OR** during a request call, check the expiry of tokens with the help of `expires_in` key and if the tokens are expired, refresh them before making the request call.
 </details>
 
-<details><summary><h2><b>Refresh tokens</b></h2></summary>
+<details><summary><h3><b>Refresh tokens</b></h3></summary>
 
 - **URL**
 
@@ -459,7 +459,7 @@ refresh_token=<refresh_token>
 ```
 </details>
 
-<details><summary><h2><b>Revoke tokens</b></h2></summary>
+<details><summary><h3><b>Revoke tokens</b></h3></summary>
 
 - **URL**
 
@@ -500,7 +500,7 @@ A successful response contains an empty body
 </details>
 
 
-<details><summary><h2><b>New subscription</b></h2></summary>
+<details><summary><h3><b>New subscription</b></h3></summary>
 
 #### Request for creating a new recurrent payment subscription
 
@@ -557,7 +557,7 @@ POST https://{BASE_URL}/v1/transactions
 ```
 </details>
 
-<details><summary><h2><b>Subscription verification</b></h2></summary>
+<details><summary><h3><b>Subscription verification</b></h3></summary>
 
 #### Check user's subscription and account balance
 
@@ -617,7 +617,7 @@ POST https://{BASE_URL}/v1/transactions/subscription-check
 ```
 </details>
 
-<details><summary><h2><b>New recurring payment</b></h2></summary>
+<details><summary><h3><b>New recurring payment</b></h3></summary>
 
 #### Request for creating recurrent payment
 
@@ -673,7 +673,7 @@ POST https://{BASE_URL}/v1/transactions/auto-approve
 ```
 </details>
 
-<details><summary><h2><b>Merchant </b></h2></summary>
+<details><summary><h3><b>Merchant </b></h3></summary>
 
 ### **`GET /v1/merchant`**
 
@@ -733,7 +733,7 @@ GET https://{BASE_URL}/v1/merchant
 ```
 </details>
 
-<details><summary><h2><b>Transaction verification</b></h2></summary>
+<details><summary><h3><b>Transaction verification</b></h3></summary>
 
 #### Request for retrieving transaction's status
 
@@ -780,7 +780,7 @@ GET https://{BASE_URL}/v1/transactions/{transactionId}/status
 ```
 </details>
 
-<details><summary><h2><b>Location's transactions</b></h2></summary>
+<details><summary><h3><b>Location's transactions</b></h3></summary>
 
 #### Request for retrieving all location's transactions
 
@@ -837,7 +837,7 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 
 ## Upcoming APIs
 
-<details><summary><h2><b>Cancel subscription</b></h2></summary>
+<details><summary><h3><b>Cancel subscription</b></h3></summary>
 
 #### Cancel user's subscription
 
