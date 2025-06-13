@@ -152,7 +152,7 @@ const initiateCheckout = async () => {
             onPaymentComplete: (paymentData) => {
                 const subscription_token = paymentData?.subscriptionToken; // the subscriptionToken is an optional field returned if you pass `create_subscription`: true
 
-                updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget on update any UI changes on your end.
+                updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget to update any UI changes on your end.
 			}
         });
     }
