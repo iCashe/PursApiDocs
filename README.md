@@ -902,3 +902,57 @@ DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
 }
 ```
 </details>
+
+<details><summary><h3><b>Void transaction</b></h3></summary>
+
+#### Void transaction and refund payment
+
+- **URL**
+
+```
+DELETE https://{BASE_URL}/v1//transactions/{transactionId}
+```
+
+- **Headers**
+
+```javascript
+{
+    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+}
+```
+
+- **Body (JSON)**
+
+```javascript
+{
+    "location_id": <purs_location_id> // The ID of the merchant location where the subscription was created (String)
+}
+```
+
+#### Response
+
+- Positive response
+
+```javascript
+{
+    "transaction_id": "<transaction_id>",
+    "status": "REVERSED"
+}
+```
+
+- Negative responses
+
+| `status code` | `message` |
+| --- | --- |
+| 401 | The bearer token is not valid. |
+| 404 | Transaction not found or already voided. |
+| 500 | Internal server error |
+
+```javascript
+{
+    "status_code": "<status_code>",
+    "message": "<message>"
+}
+```
+</details>
