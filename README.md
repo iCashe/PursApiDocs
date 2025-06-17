@@ -897,7 +897,7 @@ DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
 
 <details><summary><h3><b>Void transaction</b></h3></summary>
 
-#### Void transaction and refund payment
+#### Void transaction created by mistake. 
 
 - **URL**
 
@@ -931,6 +931,7 @@ DELETE https://{BASE_URL}/v1//transactions/{transactionId}
 | --- | --- |
 | 401 | The bearer token is not valid. |
 | 404 | Transaction not found or already voided. |
+| 403 | Transaction can not be voided. |
 | 500 | Internal server error |
 
 ```javascript
