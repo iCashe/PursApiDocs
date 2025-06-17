@@ -868,14 +868,6 @@ DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
 }
 ```
 
-- **Body (JSON)**
-
-```javascript
-{
-    "location_id": <purs_location_id> // The ID of the merchant location where the subscription was created (String)
-}
-```
-
 #### Response
 
 - Positive response
