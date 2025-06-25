@@ -37,7 +37,7 @@ There are two primary operations that the Cann-X platform will need to support:
 
 | Environment | **BASE_URL** | **OAUTH_URL**  | Purs Merchant Portal URL |
 | --- | --- | --- | --- |
-| **Sandbox** | `sandbox-api.purs.digital` | `dev-auth.purs.digital` | `sandbox-merchants.purs.digital` |
+| **Sandbox** | `sandbox-api.purs.digital` | `sandbox-auth.purs.digital` | `sandbox-merchants.purs.digital` |
 | **Production** | `api.purs.digital` | `auth.purs.digital` | `merchants.purs.digital` |
 
 ## OAuth2 Flow
