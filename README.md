@@ -37,8 +37,8 @@ There are two primary operations that the Cann-X platform will need to support:
 
 | Environment | **BASE_URL** | **OAUTH_URL**  | Purs Merchant Portal URL |
 | --- | --- | --- | --- |
-| **Sandbox** | `sandbox-api.purs.digital` | `merchant-pool-domain-721205462502.auth.us-west-2.amazoncognito.com` | `sandbox-merchants.purs.digital` |
-| **Production** | `api.purs.digital` | `merchant-pool-domain-719104550509.auth.us-west-2.amazoncognito.com` | `merchants.purs.digital` |
+| **Sandbox** | `sandbox-api.purs.digital` | `dev-auth.purs.digital` | `sandbox-merchants.purs.digital` |
+| **Production** | `api.purs.digital` | `auth.purs.digital` | `merchants.purs.digital` |
 
 ## OAuth2 Flow
 
@@ -108,7 +108,7 @@ There are 2 steps in this process  in the sequence diagram below.
 Add the Purs checkout CDN into your script tag
 
 ```html
-<script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/purs-checkout.min.js"></script>
+<script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/index.min.js"></script>
 ```
 
 **Step 2**
@@ -121,7 +121,7 @@ Add a "Pay with Purs button" on your page.
 </button>
 ```
 
-> 👍 **Recommended**: Add the Purs logo to this button. [Link](https://purs-test-cdn.s3.us-west-2.amazonaws.com/connect-with-purs.png)
+> 👍 **Recommended**: Add the Purs logo to this button. [Link](https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/connect-with-purs.png)
 
 **Step 3**
 
@@ -219,7 +219,7 @@ const updateUI = () => {
     <!-- add this button on your checkout page  -->
     <button id="purs-checkout-button">Pay with Purs</button>
 
-    <script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/purs-checkout.min.js"></script>
+    <script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/index.min.js"></script>
     <script src="./index.js" type="module"></script>
 
 </body>
