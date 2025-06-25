@@ -15,7 +15,7 @@
 
 ### **REDIRECT_URL**
 
-- You will need to provide Purs with a callback URL (referred to as **REDIRECT_URL**) which you own. Purs will redirect authenticated merchants to this **REDIRECT_URL** along with additional query parameter called `code`. The usage of this `code` is explained in the OAuth2 Flow section. 
+- You will need to provide Purs with a callback URL (referred to as **REDIRECT_URL**) which you own. Purs will redirect authenticated merchants to this **REDIRECT_URL** along with additional query parameter called `code`. The usage of this `code` is explained in the OAuth2 Flow section.
 
     > **Example**: If your merchants portal URL is `https://merchants.cann-x.com` then the REDIRECT_URL could be `https://merchants.cann-x.com/callback`
 
@@ -593,7 +593,6 @@ POST https://{BASE_URL}/v1/transactions/subscription-check
 
 ```javascript
 {
-    "location_id": <purs_location_id> // The ID of the merchant location where the subscription was created (String)
     "amount": amount, // Optional. Verifies that the user has at least this amount in their bank account
 }
 ```
@@ -653,7 +652,6 @@ POST https://{BASE_URL}/v1/transactions/auto-approve
 ```javascript
 {
     "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
-    "location_id": <purs_location_id> // The ID of the merchant location where the payment will be recorded (String)
 }
 ```
 
@@ -844,10 +842,6 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 ```
 </details>
 
----
-
-## Upcoming APIs
-
 <details><summary><h3><b>Cancel subscription</b></h3></summary>
 
 #### Cancel user's subscription
@@ -897,7 +891,7 @@ DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
 
 <details><summary><h3><b>Void transaction</b></h3></summary>
 
-#### Void transaction created by mistake. 
+#### Void transaction created by mistake.
 
 - **URL**
 
@@ -941,3 +935,9 @@ DELETE https://{BASE_URL}/v1//transactions/{transactionId}
 }
 ```
 </details>
+
+---
+
+## Upcoming APIs
+
+...
