@@ -896,7 +896,7 @@ DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
 - **URL**
 
 ```
-DELETE https://{BASE_URL}/v1//transactions/{transactionId}
+DELETE https://{BASE_URL}/v1/transactions/{transactionId}
 ```
 
 - **Headers**
