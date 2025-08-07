@@ -35,7 +35,7 @@ There are two primary operations that the Cann-X platform will need to support:
 
 > ⚠️ **Important**: Because the "Purs Checkout Widget URL" is currently inactive in Production, you won't be able to complete payment requests in Production just yet. When you are ready to go live, we will activate this URL.
 
-| Environment | **BASE_UR** | **OAUTH_URL**  | Purs Merchant Portal URL |
+| Environment | **BASE_URL** | **OAUTH_URL**  | Purs Merchant Portal URL |
 | --- | --- | --- | --- |
 | **Sandbox** | `sandbox-api.purs.digital` | `sandbox-auth.purs.digital` | `sandbox-merchants.purs.digital` |
 | **Production** | `api.purs.digital` | `auth.purs.digital` | `merchants.purs.digital` |
@@ -54,7 +54,7 @@ The process of linking a merchant account with **Purs** will ad to the standard 
 
 ### Initiate OAuth2 Authorization
 
-- Endpoint details under [OAuth APIs section](#oauth)
+- **Endpoint details under [OAuth APIs section](#oauth)**
 - To connect a seller's Purs Merchant Account with their Cann-X seller account, Cann-X will need to have a "Connect with Purs" button (likely somew in the admin portal for your merchants).
 - When clicked, this button should navigate to the `https://{OAUTH_URL}/oauth2/authorize` URL with the appropriate query parameters.
 - The merchant will be prompted to enter their Purs Merchant Portal login credentials.
