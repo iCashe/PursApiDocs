@@ -475,14 +475,22 @@ button.addEventListener('click', initiateOnboarding); // call the initiateOnboar
 
 
 ## Demo
-### Checkout Flow
+<table>
+<tr>
+<td width="50%">
 
+### Checkout Flow
 [![Demo](https://github.com/user-attachments/assets/adb28ec8-51bf-492b-8dab-4d9ec4231d84)](https://drive.google.com/file/d/1zMIE1NFHZO3gC3ZY_Y60Esy8aUI7mM2r/view?usp=sharing)
 
-### Onboarding Flow
+</td>
+<td width="50%">
 
+### Onboarding Flow
 [![Demo](https://github.com/user-attachments/assets/160eae7b-f16a-47cd-b1d8-7ba46acb55d9)](https://drive.google.com/file/d/1wXR2-bxM--znOldrUc7F4phYu-my3S0M/view?usp=sharing)
 
+</td>
+</tr>
+</table>
 
 ## API Endpoints
 
