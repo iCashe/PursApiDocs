@@ -406,10 +406,10 @@ Integration steps
 
         ```javascript
         {
-        "access_token": "eyJra1example",
-        "id_token": "eyJra2example",
-        "refresh_token": "eyJj3example",
-        "expires_in": 86400 // expiry of access_token and id token, value in seconds
+            "access_token": "eyJra1example",
+            "id_token": "eyJra2example",
+            "refresh_token": "eyJj3example",
+            "expires_in": 86400 // expiry of access_token and id token, value in seconds
         }
         ```
 
@@ -455,9 +455,9 @@ Integration steps
 
         ```javascript
         {
-        "access_token": "new1example",
-        "id_token": "new2example",
-        "expires_in": 86400 // expiry of access_token and id token, value in seconds
+            "access_token": "new1example",
+            "id_token": "new2example",
+            "expires_in": 86400 // expiry of access_token and id token, value in seconds
         }
         ```
 
@@ -465,7 +465,7 @@ Integration steps
 
         ```javascript
         {
-        "error":"invalid_request"
+            "error":"invalid_request"
         }
         ```
         
@@ -502,7 +502,7 @@ Integration steps
 
         ```javascript
         {
-        "error":"invalid_request|unsupported_token_type|invalid_client"
+            "error":"invalid_request|unsupported_token_type|invalid_client"
         }
         ```
 
@@ -564,53 +564,50 @@ Integration steps
 <details>
 
 <summary><strong>One-Time Transaction API</strong></summary><br>
+        
+    * URL
 
-* URL
+        ```
+        POST https://{BASE_URL}/v1/transactions
+        ```
 
-```
-POST https://{BASE_URL}/v1/transactions
-```
+    * Headers
 
-* Headers
+        ```javascript
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+        }
+        ```
 
-```javascript
-{
-    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
-    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-}
-```
+    * Body (JSON)
 
-* Body (JSON)
+        ```javascript
+        {
+            "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
+            "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
+        }
+        ```
 
-```javascript
-{
-    "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
-    "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
-}
-```
+    * Success Response
 
-* Success Response
+        ```javascript
+        {
+            "url": "https://{CHECKOUT_URL}?tid=abcd1234",
+            "transaction_id": "abcd1234",
+        }
+        ```
 
-```javascript
-{
-    "url": "https://{CHECKOUT_URL}?tid=abcd1234",
-    "transaction_id": "abcd1234",
-}
-```
+    * Error Responses
 
-* Error Responses
-
-| `status code` | `message` |
-| --- | --- |
-| 400 | The amount value is not an integer, less than 0, or greater than 100000. |
-| 401 | The bearer token is not valid. |
-| 404 | Location not found. |
-| 500 | Internal server error |
-
+        | `status code` | `message` |
+        | --- | --- |
+        | 400 | The amount value is not an integer, less than 0, or greater than 100000. |
+        | 401 | The bearer token is not valid. |
+        | 404 | Location not found. |
+        | 500 | Internal server error |
 
 </details>
-
-
 
 <details>
 
