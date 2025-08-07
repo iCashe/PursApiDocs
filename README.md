@@ -299,19 +299,8 @@ button.addEventListener('click', initiateCheckout); // call the initiateCheckout
 </details>
 
 <details><summary><h1><b>Onboarding Flow</b></h1></summary>
+
 <img width="599" height="615" alt="Onboarding" src="https://github.com/user-attachments/assets/4c89f654-a388-45b4-bd04-e9e0e61f18a6" />
-</details>
-
-
-## Demo
-
-[![Demo](https://github.com/user-attachments/assets/adb28ec8-51bf-492b-8dab-4d9ec4231d84)](https://drive.google.com/file/d/1zMIE1NFHZO3gC3ZY_Y60Esy8aUI7mM2r/view?usp=sharing)
-
-<details><summary><h1><b>Onboarding Flow</b></h1></summary>
-
-Sequence diagram here
-
-
 
 ### Purs Onboarding URL
 
@@ -481,6 +470,18 @@ button.addEventListener('click', initiateOnboarding); // call the initiateOnboar
 > **Note:** The naming of functions in the above code sample is for illustration purpose only. You can change it accordingly. Just make sure the core logic remains same and the `PursCheckoutWidget.init` method receives the `url` and `onOnboardingComplete` parameters.
 
 </details>
+
+
+
+## Demo
+### Checkout Flow
+
+[![Demo](https://github.com/user-attachments/assets/adb28ec8-51bf-492b-8dab-4d9ec4231d84)](https://drive.google.com/file/d/1zMIE1NFHZO3gC3ZY_Y60Esy8aUI7mM2r/view?usp=sharing)
+
+### Onboarding Flow
+
+[![Demo](https://github.com/user-attachments/assets/adb28ec8-51bf-492b-8dab-4d9ec4231d84)](https://drive.google.com/file/d/1wXR2-bxM--znOldrUc7F4phYu-my3S0M/view?usp=sharing)
+
 
 ## API Endpoints
 
