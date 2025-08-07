@@ -312,6 +312,7 @@ Integration steps
 
 <summary><strong>OAuth APIs</strong></summary><br>
 
+---
 * <strong>Connect to Purs using OAuth2 Authorization</strong>
 
     * URL
@@ -366,7 +367,7 @@ Integration steps
         // If the requested scopes are unknown, malformed, or not valid.
         HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=invalid_scope
         ```
-
+---
 * <strong>Get new set of tokens</strong>
 
     * URL
@@ -427,6 +428,7 @@ Integration steps
 
     > Note: Since the `access_token` and `id_token` expire, you can either run a daily cron job to refresh the tokens OR during a request call, check the expiry of tokens with the help of `expires_in` key and if the tokens are expired, refresh them before making the request call.
 
+---
 * <strong>Refresh tokens</strong>
 
     * URL
@@ -468,7 +470,7 @@ Integration steps
             "error":"invalid_request"
         }
         ```
-        
+---   
 * <strong>Revoke tokens</strong>
 
     * URL
@@ -505,7 +507,7 @@ Integration steps
             "error":"invalid_request|unsupported_token_type|invalid_client"
         }
         ```
-
+---
 </details>
 
 
@@ -513,6 +515,7 @@ Integration steps
 
 <summary><strong>Merchant API</strong></summary><br>
 
+---
 * <strong>Get merchant info</strong>
 
     * URL
@@ -558,13 +561,14 @@ Integration steps
         | --- | --- |
         | 401 | The bearer token is not valid. |
         | 500 | Internal server error |
-
+---
 </details>
 
 <details>
-
 <summary><strong>One-Time Transaction API</strong></summary><br>
-        
+
+---
+* <strong>Create a one-time payment request</strong>
     * URL
 
         ```
@@ -606,13 +610,14 @@ Integration steps
         | 401 | The bearer token is not valid. |
         | 404 | Location not found. |
         | 500 | Internal server error |
-
+---
 </details>
 
 <details>
 
 <summary><strong>Subscription Payment APIs</strong></summary><br>
 
+---
 * <strong>Create new subscription</strong>
 
     * URL
@@ -658,7 +663,7 @@ Integration steps
         | 404 | Location not found. |
         | 500 | Internal server error |
 
-
+---
 * <strong>Verify existing subscription</strong>
 
     * URL
@@ -705,6 +710,7 @@ Integration steps
         | `404` | User does not have active bank account |
         | `500` | Internal server error |
 
+---
 * <strong>Record a recurring payment for an existing subscription</strong>
 
     * URL
@@ -748,7 +754,7 @@ Integration steps
         | 404 | Location not found. |
         | 500 | Internal server error |
 
-
+---
 * <strong>Cancel an existing subscription</strong>
 
     * URL
@@ -784,13 +790,14 @@ Integration steps
         | 404 | Subscription not found or already canceled. |
         | 500 | Internal server error |
 
-
+---
 </details>
 
 <details>
 
 <summary><strong>Common Transaction APIs</strong></summary><br>
 
+---
 * <strong>Get all transactions for the merchant</strong>
 
     * URL
@@ -833,7 +840,7 @@ Integration steps
         | 401 | The bearer token is not valid. |
         | 500 | Internal server error |
 
-
+---
 * <strong>Get status of a single transaction</strong>
 
     * URL
@@ -869,6 +876,7 @@ Integration steps
         | 404 | Transaction could not be not found. |
         | 500 | Internal server error |
 
+---
 * <strong>Void (reverse) a transaction</strong>
 
     * URL
@@ -903,10 +911,8 @@ Integration steps
         | 404 | Transaction not found or already voided. |
         | 403 | Transaction can not be voided. |
         | 500 | Internal server error |
-
-</details>
-
 ---
+</details>
 
 ## Upcoming APIs
 
