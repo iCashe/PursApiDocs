@@ -306,6 +306,181 @@ Integration steps
 
 [![Demo](https://github.com/user-attachments/assets/adb28ec8-51bf-492b-8dab-4d9ec4231d84)](https://drive.google.com/file/d/1zMIE1NFHZO3gC3ZY_Y60Esy8aUI7mM2r/view?usp=sharing)
 
+<details><summary><h1><b>Onboarding Flow</b></h1></summary>
+
+Sequence diagram here
+
+
+
+### Purs Onboarding URL
+
+- Purs onboarding widget is a way for Cann-X to onboard their entitites to the Purs system.
+- Onboarding URL to connect a merchant to Purs is as follows:
+```html
+https://sandbox-users.purs.digital/onboarding${userType}?email=${DEVELOPER_EMAIL}
+```
+- Currently `userType` can be one of the following:
+    - `seller`
+    - `buyer`
+    - `transporter`
+- `DEVELOPER_EMAIL` is optional parameter passed so user doesn't have to again enter their email in Purs onboarding widget
+
+
+### PursCheckoutWidget method for onboarding
+
+- Below is code sample to integrate the Purs checkout widget onboading flow in your website.
+
+**Step 1**
+
+Add the Purs checkout CDN into your script tag
+
+```html
+<script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/index.min.js"></script>
+```
+
+**Step 2**
+
+Add a "Onboarding with Purs" button on your page.
+
+```html
+<button id="onboarding-btn">
+    Onboard with Purs
+</button>
+```
+
+> 👍 **Recommended**: Add the Purs logo to this button. [Link](https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/connect-with-purs.png)
+
+**Step 3**
+
+Implement the logic to call a function (`initiateOnboarding`) which initiates the onboarding flow on a button click.
+
+```javascript
+const button = document.getElementById('onboarding-btn');
+button.addEventListener('click', initiateOnboarding);
+```
+
+**Step 4**
+
+Implement the logic to call the `PursCheckoutWidget.init` method with `url` and `onOnboardingComplete` as parameters.
+
+- the `url` is `https://sandbox-users.purs.digital/onboarding${userType}?email=${DEVELOPER_EMAIL}`
+- the `onOnboardingComplete` expects a callback function (`updateOnboardingUI`) defined on your end.
+
+```javascript
+const initiateOnboarding = async () => {
+	try {
+	
+		// upto you how to pass this URL,`userType` and optional `DEVELOPER_EMAIL`
+		const onboardingUrl = `https://sandbox-users.purs.digital/onboarding/${userType}?email=${DEVELOPER_EMAIL}`;
+
+		PursCheckoutWidget.init({
+			url: onboardingUrl,
+			onOnboardingComplete: (onboardingData) => {
+				console.log('Onboarding completed!', onboardingData);
+
+				// Show user ID if available
+				const userId = onboardingData?.userId; // a userId returned for you to store it securely 
+				if (userId) {
+					console.log(`User ID: ${userId}`);
+				}
+
+				// Update Onboarding UI
+				updateOnboardingUI(); // Update UI is a function that you can implement which is called when the onboarding is completed.
+			}
+		});
+	} catch (error) {
+		console.error('Onboarding initiation failed:', error);
+	}
+};
+```
+
+**Step 5**
+
+Implement the logic for a callback function (`updateOnboardingUI`) to handle any UI changes after a successful payment.
+
+```javascript
+const updateOnboardingUI = () => {
+    const button = document.getElementById('onboarding-btn');
+    // Disable the button
+    button.disabled = true;
+    // make necessary UI changes according to your needs
+};
+```
+
+> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onOnboardingComplete` are required.
+
+- Everything combined
+
+**HTML**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cann X Website</title>
+</head>
+<body>
+    <div>Cann X Website</div>
+    <!-- add this button on your checkout page  -->
+    <button id="onboarding-btn">Onboard with Purs</button>
+
+    <script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/index.min.js"></script>
+    <script src="./index.js" type="module"></script>
+
+</body>
+</html>
+```
+
+**JavaScript**
+
+```javascript
+const updateOnboardingUI = () => {
+    const button = document.getElementById('purs-checkout-button');
+    // Disable the button
+    button.disabled = true;
+    // make necessary UI changes according to your needs
+
+
+};
+
+const initiateOnboarding = async () => {
+	try {
+	
+		// upto you how to pass this URL,`userType` and optional `DEVELOPER_EMAIL`
+		const onboardingUrl = `https://sandbox-users.purs.digital/onboarding/${userType}?email=${DEVELOPER_EMAIL}`;
+
+		PursCheckoutWidget.init({
+			url: onboardingUrl,
+			onOnboardingComplete: (onboardingData) => {
+				console.log('Onboarding completed!', onboardingData);
+
+				// Show user ID if available
+				const userId = onboardingData?.userId; // a userId returned for you to store it securely 
+				if (userId) {
+					console.log(`User ID: ${userId}`);
+				}
+
+				// Update Onboarding UI
+				updateOnboardingUI(); // Update UI is a function that you can implement which is called when the onboarding is completed.
+			}
+		});
+	} catch (error) {
+		console.error('Onboarding initiation failed:', error);
+	}
+};
+
+const button = document.getElementById('onboarding-btn');
+button.addEventListener('click', initiateOnboarding); // call the initiateOnboarding function when the button is clicked
+```
+
+**Integration steps**
+
+> **Note:** The naming of functions in the above code sample is for illustration purpose only. You can change it accordingly. Just make sure the core logic remains same and the `PursCheckoutWidget.init` method receives the `url` and `onOnboardingComplete` parameters.
+
+</details>
+
 ## API Endpoints
 
 <details>
