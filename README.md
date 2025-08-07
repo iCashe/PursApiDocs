@@ -157,6 +157,7 @@ const initiateCheckout = async () => {
     }
 }
 ```
+> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onPaymentComplete` are required.
 
 **Step 5**
 
@@ -196,7 +197,6 @@ const updateUI = () => {
 };
 ```
 
-> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onPaymentComplete` are required.
 
 - Everything combined
 
@@ -383,6 +383,7 @@ const initiateOnboarding = async () => {
 	}
 };
 ```
+> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onOnboardingComplete` are required.
 
 **Step 5**
 
@@ -397,7 +398,7 @@ const updateOnboardingUI = () => {
 };
 ```
 
-> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onOnboardingComplete` are required.
+
 
 - Everything combined
 
