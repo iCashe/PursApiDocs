@@ -597,8 +597,8 @@ Integration steps
 
         ```javascript
         {
-            "url": "https://{CHECKOUT_URL}?tid=abcd1234",
-            "transaction_id": "abcd1234",
+            "url": "https://{CHECKOUT_URL}?tid=<transaction_id>",
+            "transaction_id": "<transaction_id>",
         }
         ```
 
@@ -649,8 +649,8 @@ Integration steps
 
         ```javascript
         {
-            "url": "https://{CHECKOUT_URL}?tid=abcd1234",
-            "transaction_id": "abcd1234",
+            "url": "https://{CHECKOUT_URL}?tid=<transaction_id>",
+            "transaction_id": "<transaction_id>",
         }
         ```
 
@@ -741,7 +741,7 @@ Integration steps
 
         ```javascript
         {
-            "transaction_id": "abcd1234"
+            "transaction_id": "<transaction_id>"
         }
         ```
 
@@ -829,8 +829,8 @@ Integration steps
 
         ```javascript
         {
-            "url": "https://{CHECKOUT_URL}?tid=abcd1234",
-            "transaction_id": "abcd1234",
+            "url": "https://{CHECKOUT_URL}?tid=<transaction_id>",
+            "transaction_id": "<transaction_id>",
         }
         ```
 
@@ -875,7 +875,7 @@ Integration steps
 
         ```javascript
         {
-            "transaction_id": "9e4421e538ff4396ae40d954ae336ed4",
+            "transaction_id": "<transaction_id>",
             "status": "COMPLETED"
         }
         ```
@@ -1050,7 +1050,7 @@ Integration steps
     * URL
 
         ```
-        GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_key}&limit={limit}
+        GET https://{BASE_URL}/v1/transactions?page_key={page_key}&limit={limit}
         ```
 
         > Note - `page_key` and `limit` are optional query params. For the first request there won't be a `page_key` and if `limit` is not passed then the default value is 25.
