@@ -2,22 +2,22 @@
 
 ## Introduction
 
-- This document provides a comprehensive guide for onboarding your merchants and connecting their accounts with **Purs** and start accepting payments.
-- Before a merchant can link their account with **Purs** via your platform, a few prerequisites must be completed.
+- This document provides a comprehensive guide for onboarding your merchants and connecting their accounts with Purs and start accepting payments.
+- Before a merchant can link their account with Purs via your platform, a few prerequisites must be completed.
 
 ## Prerequisites
 
-### **CLIENT_ID** and **CLIENT_SECRET**
+### CLIENT_ID and CLIENT_SECRET
 
-- Purs will provide you with a **CLIENT_ID** and **CLIENT_SECRET.**
+- Purs will provide you with a CLIENT_ID and CLIENT_SECRET.
 
-    > **Note**: The **CLIENT_ID** and **CLIENT_SECRET** should be stored securely on your servers. These credentials should never be passed to your front-end clients.
+    > Note: The CLIENT_ID and CLIENT_SECRET should be stored securely on your servers. These credentials should never be passed to your front-end clients.
 
-### **REDIRECT_URL**
+### REDIRECT_URL
 
-- You will need to provide Purs with a callback URL (referred to as **REDIRECT_URL**) which you own. Purs will redirect authenticated merchants to this **REDIRECT_URL** along with additional query parameter called `code`. The usage of this `code` is explained in the OAuth2 Flow section.
+- You will need to provide Purs with a callback URL (referred to as REDIRECT_URL) which you own. Purs will redirect authenticated merchants to this REDIRECT_URL along with additional query parameter called `code`. The usage of this `code` is explained in the OAuth2 Flow section.
 
-    > **Example**: If your merchants portal URL is `https://merchants.cann-x.com` then the REDIRECT_URL could be `https://merchants.cann-x.com/callback`
+    > Example: If your merchants portal URL is `https://merchants.cann-x.com` then the REDIRECT_URL could be `https://merchants.cann-x.com/callback`
 
 ## Key Platform Operations
 
@@ -27,22 +27,22 @@ There are two primary operations that the Cann-X platform will need to support:
 
 - This allows merchants to connect their Purs Merchant Account with Cann-X. Once connected, this merchant can accept Purs payments on the Cann-X platform. This operation only needs to be completed once for each Cann-X merchant.
 
-### **Checkout Flow**
+### Checkout Flow
 
 - This process allows Cann-X to create Purs payment requests for Cann-X customers to complete. This operation will be done each time a transaction is to be completed on the Cann-X platform.
 
 ## Environment URLs
 
-> ⚠️ **Important**: Because the "Purs Checkout Widget URL" is currently inactive in Production, you won't be able to complete payment requests in Production just yet. When you are ready to go live, we will activate this URL.
+> ⚠️ Important: Because the "Purs Checkout Widget URL" is currently inactive in Production, you won't be able to complete payment requests in Production just yet. When you are ready to go live, we will activate this URL.
 
-| Environment | **BASE_URL** | **OAUTH_URL**  | Purs Merchant Portal URL |
+| Environment | BASE_URL | OAUTH_URL  | Purs Merchant Portal URL |
 | --- | --- | --- | --- |
-| **Sandbox** | `sandbox-api.purs.digital` | `sandbox-auth.purs.digital` | `sandbox-merchants.purs.digital` |
-| **Production** | `api.purs.digital` | `auth.purs.digital` | `merchants.purs.digital` |
+| Sandbox | `sandbox-api.purs.digital` | `sandbox-auth.purs.digital` | `sandbox-merchants.purs.digital` |
+| Production | `api.purs.digital` | `auth.purs.digital` | `merchants.purs.digital` |
 
 ## OAuth2 Flow
 
-The process of linking a merchant account with **Purs** will ad to the standard **OAuth2** authentication protocol.
+The process of linking a merchant account with Purs will ad to the standard OAuth2 authentication protocol.
 
 ### Diagram
 
@@ -50,33 +50,33 @@ The process of linking a merchant account with **Purs** will ad to the standard 
 
 
 
-> **Note**: for **Sandbox** testing, you will need to create a dummy merchant account in the Purs **Sandbox**. Navigate to the URL listed in the Environment URLs table and create a dummy Purs merchant account.
+> Note: for Sandbox testing, you will need to create a dummy merchant account in the Purs Sandbox. Navigate to the URL listed in the Environment URLs table and create a dummy Purs merchant account.
 
 ### Initiate OAuth2 Authorization
 
 - To connect a seller's Purs Merchant Account with their Cann-X seller account, Cann-X will need to have a "Connect with Purs" button (likely somew in the admin portal for your merchants).
 - When clicked, this button should navigate to the `https://{OAUTH_URL}/oauth2/authorize` URL with the appropriate query parameters.
 - The merchant will be prompted to enter their Purs Merchant Portal login credentials.
-- Once they authenticate, they will be redirected to the **REDIRECT_URL** Cann-X provided Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
-- **Endpoint details for `/oauth2/authorize` - [here](#OAuth2-Authorization)**
-- See the next section to understand what to do with the `code` that is provided by Purs as a query parameter attached to your **REDIRECT_URL**.
+- Once they authenticate, they will be redirected to the REDIRECT_URL Cann-X provided Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
+* Endpoint details for `/oauth2/authorize` - [here](#OAuth2-Authorization)
+- See the next section to understand what to do with the `code` that is provided by Purs as a query parameter attached to your REDIRECT_URL.
 
 ### Retrieve and Store Tokens
 
 - Extract the value of this `code` query parameter and make a `POST` request to Purs to exchange this short-lived `code` for OAuth tokens.
-- You will need the **CLIENT_ID** and **CLIENT_SECRET** which Purs has provided you.
-- Make sure to make this request from your backend where the **CLIENT_ID** and **CLIENT_SECRET** are stored securely.
-- **Endpoint details for `/oauth/token` - [here](#Get-new-tokens)**
+- You will need the CLIENT_ID and CLIENT_SECRET which Purs has provided you.
+- Make sure to make this request from your backend where the CLIENT_ID and CLIENT_SECRET are stored securely.
+* Endpoint details for `/oauth/token` - [here](#Get-new-tokens)
 
 ### Refresh Tokens
 
 - Since the `access_token` and `id_token` expire, you should refresh them with `refresh_token` to make valid requests.
-- **Endpoint details for `/oauth/token` (refresh) - [here](#Redresh-tokens)**
+* Endpoint details for `/oauth/token` (refresh) - [here](#Redresh-tokens)
 
 ### Revoke Tokens
 
 - This is to revoke the tokens for a particular merchant.
-- **Endpoint details for `/oauth/revoke` - [here](#Revoke-tokens)**
+* Endpoint details for `/oauth/revoke` - [here](#Revoke-tokens)
 </details>
 
 <details><summary><h1><b>Checkout Flow</b></h1></summary>
@@ -93,17 +93,17 @@ There are 2 steps in this process  in the sequence diagram below.
 ### 🟧 Purs Checkout Widget URL
 
 - Purs checkout widget is a way for Cann-X customers to make payments.
-- **Endpoint details to get the Purs Checkout Widget `/v1/transactions` - [here](#New-subscription)**
+* Endpoint details to get the Purs Checkout Widget `/v1/transactions` - [here](#New-subscription)
 
-    > **Note:** To make the above request, you need `location_id`. This `location_id` comes from the Purs system and how to get the `location_id` for a merchant is explained [**here**](#location-id-of-merchant).
+    > Note: To make the above request, you need `location_id`. This `location_id` comes from the Purs system and how to get the `location_id` for a merchant is explained [here](#location-id-of-merchant).
 
-    > **Note:** The above request should be made from your backend, not directly from your frontend. This approach ensures that the tokens and their corresponding merchant mappings, which are stored in your backend, remain secure. Your frontend should make an API call to your backend with the `amount` and `location_id` as parameters. Your backend will then handle the call to the Purs API (`/v1/transactions`) using the valid tokens stored in your system.
+    > Note: The above request should be made from your backend, not directly from your frontend. This approach ensures that the tokens and their corresponding merchant mappings, which are stored in your backend, remain secure. Your frontend should make an API call to your backend with the `amount` and `location_id` as parameters. Your backend will then handle the call to the Purs API (`/v1/transactions`) using the valid tokens stored in your system.
 
 ### 🟩 PursCheckoutWidget method
 
 - Below is code sample to integrate the Purs checkout widget in your website.
 
-**Step 1**
+Step 1
 
 Add the Purs checkout CDN into your script tag
 
@@ -111,7 +111,7 @@ Add the Purs checkout CDN into your script tag
 <script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/index.min.js"></script>
 ```
 
-**Step 2**
+Step 2
 
 Add a "Pay with Purs button" on your page.
 
@@ -121,25 +121,25 @@ Add a "Pay with Purs button" on your page.
 </button>
 ```
 
-> 👍 **Recommended**: Add the Purs logo to this button. [Link](https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/connect-with-purs.png)
+> 👍 Recommended: Add the Purs logo to this button. [Link](https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/connect-with-purs.png)
 
-**Step 3**
+Step 3
 
 Implement the logic to call a function (`initateCheckout`) which initiates the checkout flow on a button click.
 
-```javascript
+```json
 const button = document.getElementById('purs-checkout-button');
 button.addEventListener('click', initiateCheckout);
 ```
 
-**Step 4**
+Step 4
 
 Implement the logic to call the `PursCheckoutWidget.init` method with `url` and `onPaymentComplete` as parameters.
 
-- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟧 [**green section**](#-purs-checkout-widget-url).
+- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟧 [green section](#-purs-checkout-widget-url).
 - the `onPaymentComplete` expects a callback function (`updateUI`) defined on your end.
 
-```javascript
+```json
 const initiateCheckout = async () => {
     try {
         const amount = 2000 // amount value in cents
@@ -162,13 +162,13 @@ const initiateCheckout = async () => {
 }
 ```
 
-**Step 5**
+Step 5
 
 Implement the logic to get the checkout url in a function. (`createPaymentRequest`)
 
-- As mentioned [**here**](#-purs-checkout-widget-url), your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
+- As mentioned [here](#-purs-checkout-widget-url), your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
 
-```javascript
+```json
 const createPaymentRequest = async (amount, locationid) => {
     const response = await fetch('www.your-backend-api.com', {
         method: 'POST',
@@ -187,11 +187,11 @@ const createPaymentRequest = async (amount, locationid) => {
 }
 ```
 
-**Step 6**
+Step 6
 
 Implement the logic for a callback function (`updateUI`) to handle any UI changes after a successful payment.
 
-```javascript
+```json
 const updateUI = () => {
     const button = document.getElementById('purs-checkout-button');
     // Disable the button
@@ -200,11 +200,11 @@ const updateUI = () => {
 };
 ```
 
-> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onPaymentComplete` are required.
+> ⚠️ Important: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onPaymentComplete` are required.
 
 - Everything combined
 
-**HTML**
+HTML
 
 ```html
 <!DOCTYPE html>
@@ -226,9 +226,9 @@ const updateUI = () => {
 </html>
 ```
 
-**JavaScript**
+JavaScript
 
-```javascript
+```json
 const updateUI = () => {
     const button = document.getElementById('purs-checkout-button');
     // Disable the button
@@ -281,9 +281,9 @@ const button = document.getElementById('purs-checkout-button');
 button.addEventListener('click', initiateCheckout); // call the initiateCheckout function when the button is clicked
 ```
 
-**Integration steps**
+Integration steps
 
-> **Note:** The naming of functions in the above code sample is for illustration purpose only. You can change it accordingly. Just make sure the core logic remains same and the `PursCheckoutWidget.init` method receives the `url` and `onPaymentComplete` parameters.
+> Note: The naming of functions in the above code sample is for illustration purpose only. You can change it accordingly. Just make sure the core logic remains same and the `PursCheckoutWidget.init` method receives the `url` and `onPaymentComplete` parameters.
 
 
 ### Location ID of merchant
@@ -292,13 +292,13 @@ button.addEventListener('click', initiateCheckout); // call the initiateCheckout
 - During the onboarding process, when a merchant creates an account on the Purs Merchant Portal, they are required to add at least one location. Additional locations can also be added later through the portal.
 - To retrieve all locations associated with a particular merchant, use the `/v1/merchant` endpoint. This allows you to present the available locations (and other details) related to the merchant on your platform, enabling them to choose the location where they want to receive payments from your users.
 - Once the merchant selects a location, you will use the corresponding `location_id` in the request body as outlined in the previous section.
-- **Endpoint details to get the locations `/v1/merchant` - [here](#Merchant)**
+* Endpoint details to get the locations `/v1/merchant` - [here](#Merchant)
 
 ### Transaction Status
 
 - This is an optional but recommended step where you can make an additional API call to Purs to get the transaction status for a particular transaction.
-- The`transaction_id` received in the checkout URL [**response**](#post-v1transactions) will be used to retrieve the status of that transaction.
-- **Endpoint details to get transaction status `/v1/transactions/{transactionId}/status` - [here](#Transaction-verification)**
+- The`transaction_id` received in the checkout URL [response](#post-v1transactions) will be used to retrieve the status of that transaction.
+* Endpoint details to get transaction status `/v1/transactions/{transactionId}/status` - [here](#Transaction-verification)
 
 </details>
 
@@ -308,251 +308,292 @@ button.addEventListener('click', initiateCheckout); // call the initiateCheckout
 
 ## API Endpoints
 
-<details><summary><h3><b>OAuth2 Authorization</b></h3></summary>
+<details>
 
-- **URL**
+<summary><strong>OAuth APIs</strong></summary><br>
 
-```javascript
-// Put this URI in the "Connect with Purs" button
-GET https://{OAUTH_URL}/oauth2/authorize?
-		response_type=code& // leave as is. Ie. "code"
-		client_id={CLIENT_ID}&
-		redirect_uri={REDIRECT_URL}& // this must be URL-encoded
-		state=abcdefg& // this is optional
-		scope=openid+profile+email+phone+PURS_API/--- // add all required scopes
-```
+* <strong>Connect to Purs using OAuth2 Authorization</strong>
 
-| **Field** | **Type** | **Description** |
-| --- | --- | --- |
-| **`response_type`** | `string` | **(Required)** This parameter indicates the type of response desired from the OAuth2 server. It must be included in every authorization request. Currently only "code" type supported. |
-| **`client_id`** | `string` | **(Required)** The unique identifier assigned to your application by Purs. This ID is used to distinguish your application from others during the authentication process. |
-| **`redirect_uri`** | `string` | **(Required)** The URI where the user will be sent after authorization. This URI must be one of the pre-registered redirect URIs for your client ID. |
-| **`state`** | `string` | **(Optional)** The state parameter is an optional but highly recommended CSRF token to safeguard against Cross-Site Request Forgery attacks. It should be a unique, random string generated by your platform. The state value is passed a query param along with the **REDIRECT_URL** |
-| **`scope`** | `string` | **(Required)** The scope parameter requires a space-separated list of permissions, including standard scopes (`openid`, `email`, `phone`) and custom merchant-specific scopes |
+    * URL
 
-- **PURS_API/MERCHANT_READ** - Enables your application to get all locations and other related merchant information
-- **PURS_API/TRANSACTIONS_READ** - Allows read access to view transaction history
-- **PURS_API/TRANSACTIONS_WRITE** - Grants permission to create a single transactions
-- **PURS_API/SUBSCRIPTION_READ** - Provides read access to view subscription and transaction
-- **PURS_API/SUBSCRIPTION_WRITE** - Grants permission to create, cancel a subscription and related reccuring transactions
+        ```json
+        // Put this URI in the "Connect with Purs" button
+        GET https://{OAUTH_URL}/oauth2/authorize?
+                response_type=code& // leave as is. Ie. "code"
+                client_id={CLIENT_ID}&
+                redirect_uri={REDIRECT_URL}& // this must be URL-encoded
+                state=abcdefg& // this is optional
+                scope=openid+profile+email+phone+PURS_API/--- // add all required scopes
+        ```
 
-#### **Response**
+        | Field | Type | Description |
+        | --- | --- | --- |
+        | `response_type` | `string` | (Required) This parameter indicates the type of response desired from the OAuth2 server. It must be included in every authorization request. Currently only "code" type supported. |
+        | `client_id` | `string` | (Required) The unique identifier assigned to your application by Purs. This ID is used to distinguish your application from others during the authentication process. |
+        | `redirect_uri` | `string` | (Required) The URI where the user will be sent after authorization. This URI must be one of the pre-registered redirect URIs for your client ID. |
+        | `state` | `string` | (Optional) The state parameter is an optional but highly recommended CSRF token to safeguard against Cross-Site Request Forgery attacks. It should be a unique, random string generated by your platform. The state value is passed a query param along with the REDIRECT_URL |
+        | `scope` | `string` | (Required) The scope parameter requires a space-separated list of permissions, including standard scopes (`openid`, `email`, `phone`) and custom merchant-specific scopes |
 
-- Positive response
+        * PURS_API/MERCHANT_READ - Enables your application to get all locations and other related merchant information
+        * PURS_API/TRANSACTIONS_READ - Allows read-only access to transaction data (including one-time, subscription and escrow)
+        * PURS_API/TRANSACTIONS_WRITE - Grants permission to create / update transactions (including one-time, subscription and escrow)
 
-```
-HTTP/1.1 302 Found
-Location: https://{REDIRECT_URL}?code=a1b2c3d4-5678-90ab-cdef-EXAMPLE11111&state=abcdefg
-```
+    * Success Response
 
-- Negative responses
+        ```
+        HTTP/1.1 302 Found
+        Location: https://{REDIRECT_URL}?code=a1b2c3d4-5678-90ab-cdef-EXAMPLE11111&state=abcdefg
+        ```
 
-```
-// The following is the response to an example request with incorrect formatting.
-HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=invalid_request
-```
+    * Error Responses
 
-```
-// If the client requests code in response_type, but doesn't have permission for these requests.
-HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=unauthorized_client
-```
+        ```
+        // The following is the response to an example request with incorrect formatting.
+        HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=invalid_request
+        ```
 
-```
-// If the requested scopes are unknown, malformed, or not valid.
-HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=invalid_scope
-```
-</details>
+        ```
+        // If the client requests code in response_type, but doesn't have permission for these requests.
+        HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=unauthorized_client
+        ```
 
-<details><summary><h3><b>Get new tokens</b></h3></summary>
+        ```
+        // If the requested scopes are unknown, malformed, or not valid.
+        HTTP 1.1 302 Found Location: https://{REDIRECT_URL}?error=invalid_scope
+        ```
 
-- **URL**
+* <strong>Get new set of tokens</strong>
 
-```
-POST https://{OAUTH_URL}/oauth2/token
-```
+    * URL
 
-- **Headers**
+        ```
+        POST https://{OAUTH_URL}/oauth2/token
+        ```
 
-```javascript
-{
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
-}
-```
+    * Headers
 
-- **Body (form-urlencoded, not JSON)**
+        ```json
+        {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
+        }
+        ```
 
-```
-grant_type=authorization_code& // leave as is. Ie. "authorization_code"
-client_id=<CLIENT_ID>&
-code=<code>& // from query parameter
-redirect_uri=<REDIRECT_URL> // this needs to URL encoded
-```
+    * Body (form-urlencoded, not JSON)
 
-- **Base64Encode example**
+        ```
+        grant_type=authorization_code& // leave as is. Ie. "authorization_code"
+        client_id=<CLIENT_ID>&
+        code=<code>& // from query parameter
+        redirect_uri=<REDIRECT_URL> // this needs to URL encoded
+        ```
 
-```javascript
-const CLIENT_ID = 'dummy-client-id#1234'
-const CLIENT_SECRET = 'dummy-client-secret#4321'
-const authToken = `${CLIENT_ID}:${CLIENT_SECRET}`
-const base64Encode = btoa(authToken); // use this value in the Authorization header
-```
+    * Base64Encode example
 
-#### **Response**
+        ```json
+        const CLIENT_ID = 'dummy-client-id#1234'
+        const CLIENT_SECRET = 'dummy-client-secret#4321'
+        const authToken = `${CLIENT_ID}:${CLIENT_SECRET}`
+        const base64Encode = btoa(authToken); // use this value in the Authorization header
+        ```
 
-- Positive response
+    * Success Response
 
-```javascript
-{
-  "access_token": "eyJra1example",
-  "id_token": "eyJra2example",
-  "refresh_token": "eyJj3example",
-  "expires_in": 86400 // expiry of access_token and id token, value in seconds
-}
-```
+        ```json
+        {
+        "access_token": "eyJra1example",
+        "id_token": "eyJra2example",
+        "refresh_token": "eyJj3example",
+        "expires_in": 86400 // expiry of access_token and id token, value in seconds
+        }
+        ```
 
-- Negative responses
+    * Error Responses
 
-```javascript
-{
-  "error":"invalid_request|invalid_client|invalid_grant|unauthorized_client|unsupported_grant_type"
-}
-```
+        ```json
+        {
+        "error":"invalid_request|invalid_client|invalid_grant|unauthorized_client|unsupported_grant_type"
+        }
+        ```
 
-> Make sure to store these tokens securely in you system and note that every set of tokens are unique for a particular merchant.
+    > Make sure to store these tokens securely in you system and note that every set of tokens are unique for a particular merchant.
 
-> **Note**: The `access_token` and `id_token` has expiry duration of 1 day (86400 secs) and the `refresh_token` has expiry duration of 10 years.
+    > Note: The `access_token` and `id_token` has expiry duration of 1 day (86400 secs) and the `refresh_token` has expiry duration of 10 years.
 
-> **Note**: Since the `access_token` and `id_token` expire, you can either run a daily cron job to refresh the tokens **OR** during a request call, check the expiry of tokens with the help of `expires_in` key and if the tokens are expired, refresh them before making the request call.
-</details>
+    > Note: Since the `access_token` and `id_token` expire, you can either run a daily cron job to refresh the tokens OR during a request call, check the expiry of tokens with the help of `expires_in` key and if the tokens are expired, refresh them before making the request call.
 
-<details><summary><h3><b>Refresh tokens</b></h3></summary>
+* <strong>Refresh tokens</strong>
 
-- **URL**
+    * URL
 
-```
-POST https://{OAUTH_URL}/oauth2/token
-```
+        ```
+        POST https://{OAUTH_URL}/oauth2/token
+        ```
 
-- **Headers**
+    * Headers
 
-```javascript
-{
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
-}
-```
+        ```json
+        {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
+        }
+        ```
 
-- **Body (form-urlencoded, not JSON)**
+    * Body (form-urlencoded, not JSON)
 
-```
-grant_type=refresh_token& // leave as is. Ie. "refresh_token"
-refresh_token=<refresh_token>
-```
+        ```
+        grant_type=refresh_token& // leave as is. Ie. "refresh_token"
+        refresh_token=<refresh_token>
+        ```
 
-#### Response
+    * Success Response
 
-- Positive response
+        ```json
+        {
+        "access_token": "new1example",
+        "id_token": "new2example",
+        "expires_in": 86400 // expiry of access_token and id token, value in seconds
+        }
+        ```
 
-```javascript
-{
-  "access_token": "new1example",
-  "id_token": "new2example",
-  "expires_in": 86400 // expiry of access_token and id token, value in seconds
-}
-```
+    * Error responses
 
-- Negative response
+        ```json
+        {
+        "error":"invalid_request"
+        }
+        ```
+        
+* <strong>Revoke tokens</strong>
 
-```javascript
-{
-  "error":"invalid_request"
-}
-```
-</details>
+    * URL
 
-<details><summary><h3><b>Revoke tokens</b></h3></summary>
+        ```
+        POST https://{OAUTH_URL}/oauth2/revoke
+        ```
 
-- **URL**
+    * Headers
 
-```
-POST https://{OAUTH_URL}/oauth2/revoke
-```
+        ```json
+        {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
+        }
+        ```
 
-- **Headers**
+    * Body (form-urlencoded, not JSON)
 
-```javascript
-{
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
-}
-```
+        ```
+        token=<refresh_token> // the refresh token of the merchant you want to revoke all the tokens.
+        ```
 
-- **Body (form-urlencoded, not JSON)**
+    * Success Response
 
-```
-token=<refresh_token> // the refresh token of the merchant you want to revoke all the tokens.
-```
+        ```
+        A successful response contains an empty body
+        ```
 
-#### Response
+    - Negative response
 
-- Positive response
+        ```json
+        {
+        "error":"invalid_request|unsupported_token_type|invalid_client"
+        }
+        ```
 
-```
-A successful response contains an empty body
-```
-
-- Negative response
-
-```javascript
-{
-  "error":"invalid_request|unsupported_token_type|invalid_client"
-}
-```
 </details>
 
 
-<details><summary><h3><b>New subscription</b></h3></summary>
+<details>
 
-#### Request for creating a new recurrent payment subscription
+<summary><strong>Merchant API</strong></summary><br>
 
-- **URL**
+* <strong>Get merchant info</strong>
+
+    * URL
+
+        ```
+        GET https://{BASE_URL}/v1/merchant
+        ```
+
+    * Headers
+
+        ```json
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+        }
+        ```
+
+    * Success Response
+
+        ```json
+        {
+            merchant: [...],
+            bank_accounts: [...],
+            merchant_users: [...],
+            locations: [
+                {
+                location_name: 'Test location',
+                purs_location_id: 'qwertyabcd',
+                ...
+                },
+                {
+                location_name: 'Prod location',
+                purs_location_id: 'abcdqwerty',
+                ...
+                }
+            ]
+        }
+        ```
+
+    * Error Responses
+
+        | `status code` | `message` |
+        | --- | --- |
+        | 401 | The bearer token is not valid. |
+        | 500 | Internal server error |
+
+</details>
+
+<details>
+
+<summary><strong>One-Time Transaction API</strong></summary>
+
+* URL
 
 ```
 POST https://{BASE_URL}/v1/transactions
 ```
 
-- **Headers**
+* Headers
 
-```javascript
+```json
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
 }
 ```
 
-- **Body (JSON)**
+* Body (JSON)
 
-```javascript
+```json
 {
     "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
     "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
-    "create_subscription": true // Subscription flag
 }
 ```
 
-#### Response
+* Success Response
 
-- Positive response
-
-```javascript
+```json
 {
     "url": "https://{CHECKOUT_URL}?tid=abcd1234",
     "transaction_id": "abcd1234",
 }
 ```
 
-- Negative responses
+* Error Responses
 
 | `status code` | `message` |
 | --- | --- |
@@ -561,218 +602,220 @@ POST https://{BASE_URL}/v1/transactions
 | 404 | Location not found. |
 | 500 | Internal server error |
 
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
+
 </details>
 
-<details><summary><h3><b>Subscription verification</b></h3></summary>
 
-#### Check user's subscription and account balance
 
-- **URL**
+<details>
 
-```
-POST https://{BASE_URL}/v1/transactions/subscription-check
-```
+<summary><strong>Subscription Payment APIs</strong></summary><br>
 
-- **Headers**
+* <strong>Create new subscription</strong>
 
-```javascript
-{
-    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
-    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
-}
-```
+    * URL
 
-- **Body (JSON)**
+        ```
+        POST https://{BASE_URL}/v1/transactions
+        ```
 
-```javascript
-{
-    "amount": amount, // Optional. Verifies that the user has at least this amount in their bank account
-}
-```
+    * Headers
 
-#### Response
-
-- Positive response
-
-```javascript
-{
-    "created_at_datetime": "2024-05-05T11:00:00.000Z",
-    "account_nickname": "User's account",
-    "account_last_four": "1234",
-    "amount_verified": true/false      // If the amount was passed in the request
-}
-```
-
-- Negative responses
-
-| `status code` | `message` |
-| --- | --- |
-| 401 | The bearer token is not valid. |
-| 404 | Subscription not found or canceled. |
-| 404 | User does not have active bank account. |
-| 500 | Internal server error |
-
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
-</details>
-
-<details><summary><h3><b>New recurring payment</b></h3></summary>
-
-#### Request for creating recurrent payment
-
-- **URL**
-
-```
-POST https://{BASE_URL}/v1/transactions/auto-approve
-```
-
-- **Headers**
-
-```javascript
-{
-    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
-    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
-}
-```
-
-- **Body (JSON)**
-
-```javascript
-{
-    "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
-}
-```
-
-#### Response
-
-- Positive response
-
-```javascript
-{
-    "transaction_id": "abcd1234"
-}
-```
-
-- Negative responses
-
-| `status code` | `message` |
-| --- | --- |
-| 400 | The amount value is not an integer, non positive, or greater than 100000. |
-| 401 | The bearer token is not valid. |
-| 404 | Location not found. |
-| 500 | Internal server error |
-
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
-</details>
-
-<details><summary><h3><b>Merchant </b></h3></summary>
-
-### **`GET /v1/merchant`**
-
-#### Request for retrieving merchant's data
-
-- **URL**
-
-```
-GET https://{BASE_URL}/v1/merchant
-```
-
-- **Headers**
-
-```javascript
-{
-    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
-    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-}
-```
-
-#### Response
-
-- Positive response
-
-```javascript
-{
-    merchant: [...],
-    bank_accounts: [...],
-    merchant_users: [...],
-    locations: [
+        ```json
         {
-          location_name: 'Test location',
-          purs_location_id: 'qwertyabcd',
-          ...
-        },
-        {
-          location_name: 'Prod location',
-          purs_location_id: 'abcdqwerty',
-          ...
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
         }
-    ]
-}
-```
+        ```
 
-- Negative responses
+    * Body (JSON)
 
-| `status code` | `message` |
-| --- | --- |
-| 401 | The bearer token is not valid. |
-| 500 | Internal server error |
+        ```json
+        {
+            "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
+            "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
+            "create_subscription": true // Subscription flag
+        }
+        ```
 
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
+    * Success Response
+
+        ```json
+        {
+            "url": "https://{CHECKOUT_URL}?tid=abcd1234",
+            "transaction_id": "abcd1234",
+        }
+        ```
+
+    * Error Responses
+
+        | `status code` | `message` |
+        | --- | --- |
+        | 400 | The amount value is not an integer, less than 0, or greater than 100000. |
+        | 401 | The bearer token is not valid. |
+        | 404 | Location not found. |
+        | 500 | Internal server error |
+
+
+* <strong>Verify existing subscription</strong>
+
+    * URL
+
+        ```
+        POST https://{BASE_URL}/v1/transactions/subscription-check
+        ```
+
+    * Headers
+
+        ```json
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+            "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
+        }
+        ```
+
+    * Body (JSON)
+
+        ```json
+        {
+            "amount": amount, // Optional. Verifies that the user has at least this amount in their bank account
+        }
+        ```
+
+    * Success Response
+
+        ```json
+        {
+            "created_at_datetime": "2024-05-05T11:00:00.000Z",
+            "account_nickname": "User's account",
+            "account_last_four": "1234",
+            "amount_verified": true/false      // If the amount was passed in the request
+        }
+        ```
+
+    * Error Responses
+
+        | Status | Error Message |
+        |--------|---------------|
+        | `401` | The bearer token is not valid |
+        | `404` | Subscription not found or canceled |
+        | `404` | User does not have active bank account |
+        | `500` | Internal server error |
+
+* <strong>Record a recurring payment for an existing subscription</strong>
+
+    * URL
+
+        ```
+        POST https://{BASE_URL}/v1/transactions/auto-approve
+        ```
+
+    * Headers
+
+        ```json
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+            "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
+        }
+        ```
+
+    * Body (JSON)
+
+        ```json
+        {
+            "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
+        }
+        ```
+
+    * Success Response
+
+        ```json
+        {
+            "transaction_id": "abcd1234"
+        }
+        ```
+
+    * Error Responses
+
+        | `status code` | `message` |
+        | --- | --- |
+        | 400 | The amount value is not an integer, non positive, or greater than 100000. |
+        | 401 | The bearer token is not valid. |
+        | 404 | Location not found. |
+        | 500 | Internal server error |
+
+
+* <strong>Cancel an existing subscription</strong>
+
+    * URL
+
+        ```
+        DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
+        ```
+
+    * Headers
+
+        ```json
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+            "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
+        }
+        ```
+
+    * Success Response
+
+        ```json
+        {
+            "created_at_datetime": "2024-05-05T11:00:00.000Z",
+            "canceled_at_datetime": "2024-06-06T00:00:00.000Z"
+        }
+        ```
+
+    * Error Responses
+
+        | `status code` | `message` |
+        | --- | --- |
+        | 401 | The bearer token is not valid. |
+        | 404 | Subscription not found or already canceled. |
+        | 500 | Internal server error |
+
+
 </details>
 
 <details><summary><h3><b>Transaction verification</b></h3></summary>
 
 #### Request for retrieving transaction's status
 
-- **URL**
+* URL
 
 ```
 GET https://{BASE_URL}/v1/transactions/{transactionId}/status
 ```
 
-- **Headers**
+* Headers
 
-```javascript
+```json
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
 }
 ```
 
-#### Response
 
-- Positive response
 
-```javascript
+* Success Response
+
+```json
 {
     "transaction_id": "<transaction_id>",
     "status": "COMPLETED" | "PENDING" | "CANCELLED" | "REVERSED"
 }
 ```
 
-- Negative responses
+* Error Responses
 
 | `status code` | `message` |
 | --- | --- |
@@ -781,39 +824,34 @@ GET https://{BASE_URL}/v1/transactions/{transactionId}/status
 | 404 | Transaction could not be not found. |
 | 500 | Internal server error |
 
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
+
 </details>
 
 <details><summary><h3><b>Location's transactions</b></h3></summary>
 
 #### Request for retrieving all location's transactions
 
-- **URL**
+* URL
 
 ```
 GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_key}&limit={limit}
 ```
 #### Note - `page_key` and `limit` are optional query params. For the first request there won't be a `page_key` and if `limit` is not passed then the default value is 25.
 
-- **Headers**
+* Headers
 
-```javascript
+```json
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
 }
 ```
 
-#### Response
 
-- Positive response
 
-```javascript
+* Success Response
+
+```json
 {
   transactions: [{
       transaction_id: "<transaction_id>",
@@ -826,7 +864,7 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 }
 ```
 
-- Negative responses
+* Error Responses
 
 | `status code` | `message` |
 | --- | --- |
@@ -834,92 +872,38 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 | 401 | The bearer token is not valid. |
 | 500 | Internal server error |
 
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
-</details>
-
-<details><summary><h3><b>Cancel subscription</b></h3></summary>
-
-#### Cancel user's subscription
-
-- **URL**
-
-```
-DELETE https://{BASE_URL}/v1/transactions/subscription-cancel
-```
-
-- **Headers**
-
-```javascript
-{
-    "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
-    "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
-    "x-subscription-token": "<subscription_token>" // Token returned by Purs during user subscription process to confirm recurrent payment
-}
-```
-
-#### Response
-
-- Positive response
-
-```javascript
-{
-    "created_at_datetime": "2024-05-05T11:00:00.000Z",
-    "canceled_at_datetime": "2024-06-06T00:00:00.000Z"
-}
-```
-
-- Negative responses
-
-| `status code` | `message` |
-| --- | --- |
-| 401 | The bearer token is not valid. |
-| 404 | Subscription not found or already canceled. |
-| 500 | Internal server error |
-
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
-</details>
 
 <details><summary><h3><b>Void transaction</b></h3></summary>
 
 #### Void transaction created by mistake.
 
-- **URL**
+* URL
 
 ```
 DELETE https://{BASE_URL}/v1/transactions/{transactionId}
 ```
 
-- **Headers**
+* Headers
 
-```javascript
+```json
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
 }
 ```
 
-#### Response
 
-- Positive response
 
-```javascript
+* Success Response
+
+```json
 {
     "transaction_id": "<transaction_id>",
     "status": "REVERSED"
 }
 ```
 
-- Negative responses
+* Error Responses
 
 | `status code` | `message` |
 | --- | --- |
@@ -928,12 +912,7 @@ DELETE https://{BASE_URL}/v1/transactions/{transactionId}
 | 403 | Transaction can not be voided. |
 | 500 | Internal server error |
 
-```javascript
-{
-    "status_code": "<status_code>",
-    "message": "<message>"
-}
-```
+
 </details>
 
 ---
