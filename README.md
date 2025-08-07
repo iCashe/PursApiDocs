@@ -127,7 +127,7 @@ Step 3
 
 Implement the logic to call a function (`initateCheckout`) which initiates the checkout flow on a button click.
 
-```json
+```javascript
 const button = document.getElementById('purs-checkout-button');
 button.addEventListener('click', initiateCheckout);
 ```
@@ -139,7 +139,7 @@ Implement the logic to call the `PursCheckoutWidget.init` method with `url` and 
 - the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟧 [green section](#-purs-checkout-widget-url).
 - the `onPaymentComplete` expects a callback function (`updateUI`) defined on your end.
 
-```json
+```javascript
 const initiateCheckout = async () => {
     try {
         const amount = 2000 // amount value in cents
@@ -168,7 +168,7 @@ Implement the logic to get the checkout url in a function. (`createPaymentReques
 
 - As mentioned [here](#-purs-checkout-widget-url), your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
 
-```json
+```javascript
 const createPaymentRequest = async (amount, locationid) => {
     const response = await fetch('www.your-backend-api.com', {
         method: 'POST',
@@ -191,7 +191,7 @@ Step 6
 
 Implement the logic for a callback function (`updateUI`) to handle any UI changes after a successful payment.
 
-```json
+```javascript
 const updateUI = () => {
     const button = document.getElementById('purs-checkout-button');
     // Disable the button
@@ -228,7 +228,7 @@ HTML
 
 JavaScript
 
-```json
+```javascript
 const updateUI = () => {
     const button = document.getElementById('purs-checkout-button');
     // Disable the button
@@ -316,7 +316,7 @@ Integration steps
 
     * URL
 
-        ```json
+        ```javascript
         // Put this URI in the "Connect with Purs" button
         GET https://{OAUTH_URL}/oauth2/authorize?
                 response_type=code& // leave as is. Ie. "code"
@@ -372,7 +372,7 @@ Integration steps
 
     * Headers
 
-        ```json
+        ```javascript
         {
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
@@ -390,7 +390,7 @@ Integration steps
 
     * Base64Encode example
 
-        ```json
+        ```javascript
         const CLIENT_ID = 'dummy-client-id#1234'
         const CLIENT_SECRET = 'dummy-client-secret#4321'
         const authToken = `${CLIENT_ID}:${CLIENT_SECRET}`
@@ -399,7 +399,7 @@ Integration steps
 
     * Success Response
 
-        ```json
+        ```javascript
         {
         "access_token": "eyJra1example",
         "id_token": "eyJra2example",
@@ -410,7 +410,7 @@ Integration steps
 
     * Error Responses
 
-        ```json
+        ```javascript
         {
         "error":"invalid_request|invalid_client|invalid_grant|unauthorized_client|unsupported_grant_type"
         }
@@ -432,7 +432,7 @@ Integration steps
 
     * Headers
 
-        ```json
+        ```javascript
         {
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
@@ -448,7 +448,7 @@ Integration steps
 
     * Success Response
 
-        ```json
+        ```javascript
         {
         "access_token": "new1example",
         "id_token": "new2example",
@@ -458,7 +458,7 @@ Integration steps
 
     * Error responses
 
-        ```json
+        ```javascript
         {
         "error":"invalid_request"
         }
@@ -474,7 +474,7 @@ Integration steps
 
     * Headers
 
-        ```json
+        ```javascript
         {
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": "Basic <Base64Encode(<CLIENT_ID>:<CLIENT_SECRET>)>"
@@ -495,7 +495,7 @@ Integration steps
 
     - Negative response
 
-        ```json
+        ```javascript
         {
         "error":"invalid_request|unsupported_token_type|invalid_client"
         }
@@ -518,7 +518,7 @@ Integration steps
 
     * Headers
 
-        ```json
+        ```javascript
         {
             "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
             "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -527,7 +527,7 @@ Integration steps
 
     * Success Response
 
-        ```json
+        ```javascript
         {
             merchant: [...],
             bank_accounts: [...],
@@ -568,7 +568,7 @@ POST https://{BASE_URL}/v1/transactions
 
 * Headers
 
-```json
+```javascript
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -577,7 +577,7 @@ POST https://{BASE_URL}/v1/transactions
 
 * Body (JSON)
 
-```json
+```javascript
 {
     "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
     "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
@@ -586,7 +586,7 @@ POST https://{BASE_URL}/v1/transactions
 
 * Success Response
 
-```json
+```javascript
 {
     "url": "https://{CHECKOUT_URL}?tid=abcd1234",
     "transaction_id": "abcd1234",
@@ -621,7 +621,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Headers
 
-        ```json
+        ```javascript
         {
             "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
             "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -630,7 +630,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Body (JSON)
 
-        ```json
+        ```javascript
         {
             "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
             "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
@@ -640,7 +640,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Success Response
 
-        ```json
+        ```javascript
         {
             "url": "https://{CHECKOUT_URL}?tid=abcd1234",
             "transaction_id": "abcd1234",
@@ -667,7 +667,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Headers
 
-        ```json
+        ```javascript
         {
             "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
             "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -677,7 +677,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Body (JSON)
 
-        ```json
+        ```javascript
         {
             "amount": amount, // Optional. Verifies that the user has at least this amount in their bank account
         }
@@ -685,7 +685,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Success Response
 
-        ```json
+        ```javascript
         {
             "created_at_datetime": "2024-05-05T11:00:00.000Z",
             "account_nickname": "User's account",
@@ -713,7 +713,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Headers
 
-        ```json
+        ```javascript
         {
             "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
             "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -723,7 +723,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Body (JSON)
 
-        ```json
+        ```javascript
         {
             "amount": amount, // The amount in cents to be paid by the user (non-zero)  (Integer)
         }
@@ -731,7 +731,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Success Response
 
-        ```json
+        ```javascript
         {
             "transaction_id": "abcd1234"
         }
@@ -757,7 +757,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Headers
 
-        ```json
+        ```javascript
         {
             "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
             "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -767,7 +767,7 @@ POST https://{BASE_URL}/v1/transactions
 
     * Success Response
 
-        ```json
+        ```javascript
         {
             "created_at_datetime": "2024-05-05T11:00:00.000Z",
             "canceled_at_datetime": "2024-06-06T00:00:00.000Z"
@@ -797,7 +797,7 @@ GET https://{BASE_URL}/v1/transactions/{transactionId}/status
 
 * Headers
 
-```json
+```javascript
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -808,7 +808,7 @@ GET https://{BASE_URL}/v1/transactions/{transactionId}/status
 
 * Success Response
 
-```json
+```javascript
 {
     "transaction_id": "<transaction_id>",
     "status": "COMPLETED" | "PENDING" | "CANCELLED" | "REVERSED"
@@ -840,7 +840,7 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 
 * Headers
 
-```json
+```javascript
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -851,7 +851,7 @@ GET https://{BASE_URL}/v1/transactions?location_id={locationId}&page_key={page_k
 
 * Success Response
 
-```json
+```javascript
 {
   transactions: [{
       transaction_id: "<transaction_id>",
@@ -885,7 +885,7 @@ DELETE https://{BASE_URL}/v1/transactions/{transactionId}
 
 * Headers
 
-```json
+```javascript
 {
     "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
     "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
@@ -896,7 +896,7 @@ DELETE https://{BASE_URL}/v1/transactions/{transactionId}
 
 * Success Response
 
-```json
+```javascript
 {
     "transaction_id": "<transaction_id>",
     "status": "REVERSED"
