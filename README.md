@@ -338,9 +338,9 @@ Integration steps
         #### Custom Merchant Scopes
         | Scope | Description |
         |-------|-------------|
-        | `PURS_API/MERCHANT_READ` | Enables your application to get all locations and other related merchant information |
-        | `PURS_API/TRANSACTIONS_READ` | Allows read-only access to transaction data (including one-time, subscription and escrow) |
-        | `PURS_API/TRANSACTIONS_WRITE` | Grants permission to create / update transactions (including one-time, subscription and escrow) |
+        | `PURS_API/MERCHANT_READ` | Enables your application to get merchant information |
+        | `PURS_API/TRANSACTIONS_READ` | Allows read-only access to all transactions data |
+        | `PURS_API/TRANSACTIONS_WRITE` | Grants permission to create / update transactions |
 
 
     * Success Response
