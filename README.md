@@ -1008,7 +1008,7 @@ button.addEventListener('click', initiateOnboarding); // call the initiateOnboar
         {
             "amount": amount, // The amount in cents to be moved from buyer to escrow account  (Integer)
             "create_escrow": true, // Escrow flag
-            "seller_id": <seller_id> // User ID generated with the onboarding flow for external merchant payee
+            "seller_id": <seller_id> // userId generated with the onboarding flow for external merchant payee
         }
         ```
 
