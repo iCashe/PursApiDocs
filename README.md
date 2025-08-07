@@ -795,6 +795,251 @@ Integration steps
 
 <details>
 
+<summary><strong>Escrow Payment APIs</strong></summary><br>
+
+---
+* <strong>Create new escrow transaction</strong>
+
+    * URL
+
+        ```
+        POST https://{BASE_URL}/v1/transactions
+        ```
+
+    * Headers
+
+        ```javascript
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+        }
+        ```
+
+    * Body (JSON)
+
+        ```javascript
+        {
+            "amount": amount, // The amount in cents to be moved from buyer to escrow account  (Integer)
+            "create_escrow": true, // Escrow flag
+            "seller_id": <seller_id> // User ID generated with the onboarding flow for external merchant payee
+        }
+        ```
+
+    * Success Response
+
+        ```javascript
+        {
+            "url": "https://{CHECKOUT_URL}?tid=abcd1234",
+            "transaction_id": "abcd1234",
+        }
+        ```
+
+    * Error Responses
+
+        | `status code` | `message` |
+        | --- | --- |
+        | 400 | The amount value is not an integer, less than or equal to 0, or greater than 100000. |
+        | 401 | The bearer token is not valid. |
+        | 404 | Location not found. |
+        | 500 | Internal server error |
+
+---
+
+* <strong>Top-up balance for an escrow transaction</strong>
+
+    * URL
+
+        ```
+        POST https://{BASE_URL}/v1/transactions/escrow-toptup
+        ```
+
+    * Headers
+
+        ```javascript
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+            "x-escrow-token": "<escrow_token>" // Token returned by Purs when user confirms the escrow transaction first time
+        }
+        ```
+
+    * Body (JSON)
+
+        ```javascript
+        {
+            "amount": amount, // The additional amount in cents to be moved from buyer to escrow account  (Integer)
+        }
+        ```
+
+    * Success Response
+
+        ```javascript
+        {
+            "transaction_id": "9e4421e538ff4396ae40d954ae336ed4",
+            "status": "COMPLETED"
+        }
+        ```
+
+    * Error Responses
+
+        | Status | Error Message |
+        |--------|---------------|
+        | `401` | The bearer token is not valid |
+        | `404` | Escrow transaction not found |
+        | `404` | User does not have active bank account |
+        | `500` | Internal server error |
+
+---
+
+* <strong>Release funds and settle escrow transaction</strong>
+
+    * URL
+
+        ```
+        POST https://{BASE_URL}/v1/transactions/escrow-release
+        ```
+
+    * Headers
+
+        ```javascript
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+            "x-escrow-token": "<escrow_token>" // Token returned by Purs when user confirms the escrow transaction first time
+        }
+        ```
+
+    * Body (JSON)
+
+        ```javascript
+        {
+            "auto_refund_excess": true|false, // if true, additional escrow balance will be returned to buyer, else balance must settle to 0
+            "payments": [
+                // provide a list of payor + payee+ amount records to be processed
+                // default payor is escrow if not specified
+                // buyer_id need not be specified for refund of remaining amount, only set auto_refund_excess to true
+                // all ID values mentioned below are returned by Purs during onboarding of the respective entities
+                {
+                    // payment to seller
+                    "payee_id": <seller_id>,
+                    "amount": 500
+                },
+                {
+                    // payment to transporter
+                    "payee_id": <transporter_id>,
+                    "amount": 100
+                },
+                {
+                    // seller to transporter transfer
+                    "payor_id": <seller_id>,
+                    "payee_id": <transporter_id>,
+                    "amount": 127
+                }
+            ]
+        }
+        ```
+
+    * Success Response
+
+        ```javascript
+        {
+            "message": "Success"
+        }
+        ```
+
+    * Error Responses
+
+        | Status | Error Message |
+        |--------|---------------|
+        | `401` | The bearer token is not valid |
+        | `404` | Escrow transaction not found |
+        | `404` | User does not have active bank account |
+        | `500` | Internal server error |
+
+---
+
+
+* <strong>Check existing escrow transaction status</strong>
+
+    * URL
+
+        ```
+        GET https://{BASE_URL}/v1/transactions/escrow-check
+        ```
+
+    * Headers
+
+        ```javascript
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+            "x-escrow-token": "<escrow_token>" // Token returned by Purs when user confirms the escrow transaction first time
+        }
+        ```
+
+    * Success Response
+
+        ```javascript
+        {
+            "status": "HOLD|READY|CLOSED",
+            "updated_at_datetime": "2025-08-07T18:41:42.525Z",
+            "escrow_available": 0, // Balance already available in escrow account for settlement
+            "escrow_pending": 0 // Balance amount in transit from buyer to escrow account for the ACH to-up done
+        }
+        ```
+
+    * Error Responses
+
+        | Status | Error Message |
+        |--------|---------------|
+        | `401` | The bearer token is not valid |
+        | `404` | Escrow transaction not found |
+        | `404` | User does not have active bank account |
+        | `500` | Internal server error |
+
+---
+
+* <strong>Confirm an escrow transaction (update from HOLD to READY - only for non-production)</strong>
+
+    * URL
+
+        ```
+        POST https://{BASE_URL}/v1/transactions/escrow-confirm
+        ```
+
+    * Headers
+
+        ```javascript
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+            "x-escrow-token": "<escrow_token>" // Token returned by Purs when user confirms the escrow transaction first time
+        }
+        ```
+
+    * Success Response
+
+        ```javascript
+        {
+            "status": "READY",
+            "escrow_available": 3000, // Balance already available in escrow account for settlement
+            "escrow_pending": 0 // Balance amount in transit from buyer to escrow account for the ACH to-up done
+        }
+        ```
+
+    * Error Responses
+
+        | Status | Error Message |
+        |--------|---------------|
+        | `401` | The bearer token is not valid |
+        | `404` | Escrow transaction not found |
+        | `404` | User does not have active bank account |
+        | `500` | Internal server error |
+
+---
+
+<details>
+
 <summary><strong>Common Transaction APIs</strong></summary><br>
 
 ---
@@ -821,14 +1066,14 @@ Integration steps
 
         ```javascript
         {
-        transactions: [{
-            transaction_id: "<transaction_id>",
-            status: "COMPLETED" | "PENDING" | "CANCELLED" | "REVERSED",
-            ...
-            }, {
-            ...
-            }],
-        next_page_key: "<page_key>"
+            transactions: [{
+                transaction_id: "<transaction_id>",
+                status: "COMPLETED" | "PENDING" | "CANCELLED" | "REVERSED",
+                ...
+                }, {
+                ...
+                }],
+            next_page_key: "<page_key>"
         }
         ```
 
