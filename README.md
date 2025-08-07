@@ -2,22 +2,22 @@
 
 ## Introduction
 
-- This document provides a comprehensive guide for onboarding your merchants and connecting their accounts with Purs and start accepting payments.
-- Before a merchant can link their account with Purs via your platform, a few prerequisites must be completed.
+- This document provides a comprehensive guide for onboarding your merchants and connecting their accounts with **Purs** and start accepting payments.
+- Before a merchant can link their account with **Purs** via your platform, a few prerequisites must be completed.
 
 ## Prerequisites
 
-### CLIENT_ID and CLIENT_SECRET
+### **CLIENT_ID** and **CLIENT_SECRET**
 
-- Purs will provide you with a CLIENT_ID and CLIENT_SECRET.
+- Purs will provide you with a **CLIENT_ID** and **CLIENT_SECRET**.
 
-    > Note: The CLIENT_ID and CLIENT_SECRET should be stored securely on your servers. These credentials should never be passed to your front-end clients.
+    > **Note**: The **CLIENT_ID** and **CLIENT_SECRET** should be stored securely on your servers. These credentials should never be passed to your front-end clients.
 
-### REDIRECT_URL
+### **REDIRECT_URL**
 
-- You will need to provide Purs with a callback URL (referred to as REDIRECT_URL) which you own. Purs will redirect authenticated merchants to this REDIRECT_URL along with additional query parameter called `code`. The usage of this `code` is explained in the OAuth2 Flow section.
+- You will need to provide Purs with a callback URL (referred to as **REDIRECT_URL**) which you own. Purs will redirect authenticated merchants to this **REDIRECT_URL** along with additional query parameter called `code`. The usage of this `code` is explained in the OAuth2 Flow section.
 
-    > Example: If your merchants portal URL is `https://merchants.cann-x.com` then the REDIRECT_URL could be `https://merchants.cann-x.com/callback`
+    > **Example**: If your merchants portal URL is `https://merchants.cann-x.com` then the REDIRECT_URL could be `https://merchants.cann-x.com/callback`
 
 ## Key Platform Operations
 
@@ -27,22 +27,22 @@ There are two primary operations that the Cann-X platform will need to support:
 
 - This allows merchants to connect their Purs Merchant Account with Cann-X. Once connected, this merchant can accept Purs payments on the Cann-X platform. This operation only needs to be completed once for each Cann-X merchant.
 
-### Checkout Flow
+### **Checkout Flow**
 
 - This process allows Cann-X to create Purs payment requests for Cann-X customers to complete. This operation will be done each time a transaction is to be completed on the Cann-X platform.
 
 ## Environment URLs
 
-> ⚠️ Important: Because the "Purs Checkout Widget URL" is currently inactive in Production, you won't be able to complete payment requests in Production just yet. When you are ready to go live, we will activate this URL.
+> ⚠️ **Important**: Because the "Purs Checkout Widget URL" is currently inactive in Production, you won't be able to complete payment requests in Production just yet. When you are ready to go live, we will activate this URL.
 
-| Environment | BASE_URL | OAUTH_URL  | Purs Merchant Portal URL |
+| Environment | **BASE_UR** | **OAUTH_URL**  | Purs Merchant Portal URL |
 | --- | --- | --- | --- |
-| Sandbox | `sandbox-api.purs.digital` | `sandbox-auth.purs.digital` | `sandbox-merchants.purs.digital` |
-| Production | `api.purs.digital` | `auth.purs.digital` | `merchants.purs.digital` |
+| **Sandbox** | `sandbox-api.purs.digital` | `sandbox-auth.purs.digital` | `sandbox-merchants.purs.digital` |
+| **Production** | `api.purs.digital` | `auth.purs.digital` | `merchants.purs.digital` |
 
 ## OAuth2 Flow
 
-The process of linking a merchant account with Purs will ad to the standard OAuth2 authentication protocol.
+The process of linking a merchant account with **Purs** will ad to the standard **OAuth2** authentication protocol.
 
 ### Diagram
 
@@ -50,33 +50,31 @@ The process of linking a merchant account with Purs will ad to the standard OAut
 
 
 
-> Note: for Sandbox testing, you will need to create a dummy merchant account in the Purs Sandbox. Navigate to the URL listed in the Environment URLs table and create a dummy Purs merchant account.
+> **Note**: for **Sandbox** testing, you will need to create a dummy merchant account in the Purs **Sandbox**. Navigate to the URL listed in the Environment URLs table and create a dummy Purs merchant account.
 
 ### Initiate OAuth2 Authorization
 
+- Endpoint details under [OAuth APIs section](#oauth)
 - To connect a seller's Purs Merchant Account with their Cann-X seller account, Cann-X will need to have a "Connect with Purs" button (likely somew in the admin portal for your merchants).
 - When clicked, this button should navigate to the `https://{OAUTH_URL}/oauth2/authorize` URL with the appropriate query parameters.
 - The merchant will be prompted to enter their Purs Merchant Portal login credentials.
-- Once they authenticate, they will be redirected to the REDIRECT_URL Cann-X provided Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
-* Endpoint details for `/oauth2/authorize` - [here](#OAuth2-Authorization)
-- See the next section to understand what to do with the `code` that is provided by Purs as a query parameter attached to your REDIRECT_URL.
+- Once they authenticate, they will be redirected to the **REDIRECT_URL** Cann-X provided Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
+- See the next section to understand what to do with the `code` that is provided by Purs as a query parameter attached to your **REDIRECT_URL**.
 
 ### Retrieve and Store Tokens
 
 - Extract the value of this `code` query parameter and make a `POST` request to Purs to exchange this short-lived `code` for OAuth tokens.
-- You will need the CLIENT_ID and CLIENT_SECRET which Purs has provided you.
-- Make sure to make this request from your backend where the CLIENT_ID and CLIENT_SECRET are stored securely.
-* Endpoint details for `/oauth/token` - [here](#Get-new-tokens)
+- You will need the **CLIENT_ID** and **CLIENT_SECRET** which Purs has provided you.
+- Make sure to make this request from your backend where the **CLIENT_ID** and **CLIENT_SECRET** are stored securely.
 
 ### Refresh Tokens
 
 - Since the `access_token` and `id_token` expire, you should refresh them with `refresh_token` to make valid requests.
-* Endpoint details for `/oauth/token` (refresh) - [here](#Redresh-tokens)
 
 ### Revoke Tokens
 
 - This is to revoke the tokens for a particular merchant.
-* Endpoint details for `/oauth/revoke` - [here](#Revoke-tokens)
+
 </details>
 
 <details><summary><h1><b>Checkout Flow</b></h1></summary>
@@ -93,17 +91,15 @@ There are 2 steps in this process  in the sequence diagram below.
 ### 🟧 Purs Checkout Widget URL
 
 - Purs checkout widget is a way for Cann-X customers to make payments.
-* Endpoint details to get the Purs Checkout Widget `/v1/transactions` - [here](#New-subscription)
+- **Endpoint details to get the Purs Checkout Widget `/v1/transactions` under [Escrow Payment APIs](#escrow-payment)**
 
-    > Note: To make the above request, you need `location_id`. This `location_id` comes from the Purs system and how to get the `location_id` for a merchant is explained [here](#location-id-of-merchant).
-
-    > Note: The above request should be made from your backend, not directly from your frontend. This approach ensures that the tokens and their corresponding merchant mappings, which are stored in your backend, remain secure. Your frontend should make an API call to your backend with the `amount` and `location_id` as parameters. Your backend will then handle the call to the Purs API (`/v1/transactions`) using the valid tokens stored in your system.
+    > **Note**: The above request should be made from your backend, not directly from your frontend. This approach ensures that the tokens and their corresponding merchant mappings, which are stored in your backend, remain secure. Your frontend should make an API call to your backend with the required parameters. Your backend will then handle the call to the Purs API (`/v1/transactions`) using the valid tokens stored in your system.
 
 ### 🟩 PursCheckoutWidget method
 
 - Below is code sample to integrate the Purs checkout widget in your website.
 
-Step 1
+**Step 1**
 
 Add the Purs checkout CDN into your script tag
 
@@ -111,7 +107,7 @@ Add the Purs checkout CDN into your script tag
 <script src="https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/index.min.js"></script>
 ```
 
-Step 2
+**Step 2**
 
 Add a "Pay with Purs button" on your page.
 
@@ -121,9 +117,9 @@ Add a "Pay with Purs button" on your page.
 </button>
 ```
 
-> 👍 Recommended: Add the Purs logo to this button. [Link](https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/connect-with-purs.png)
+> 👍 **Recommended**: Add the Purs logo to this button. [Link](https://purs-sandbox-cdn.s3.us-west-2.amazonaws.com/checkout/v1/connect-with-purs.png)
 
-Step 3
+**Step 3**
 
 Implement the logic to call a function (`initateCheckout`) which initiates the checkout flow on a button click.
 
@@ -132,11 +128,11 @@ const button = document.getElementById('purs-checkout-button');
 button.addEventListener('click', initiateCheckout);
 ```
 
-Step 4
+**Step 4**
 
 Implement the logic to call the `PursCheckoutWidget.init` method with `url` and `onPaymentComplete` as parameters.
 
-- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟧 [green section](#-purs-checkout-widget-url).
+- the `url` takes the value of checkout url and steps to get this url are mentioned in the 🟧 [**green section**](#-purs-checkout-widget-url).
 - the `onPaymentComplete` expects a callback function (`updateUI`) defined on your end.
 
 ```javascript
@@ -162,11 +158,11 @@ const initiateCheckout = async () => {
 }
 ```
 
-Step 5
+**Step 5**
 
 Implement the logic to get the checkout url in a function. (`createPaymentRequest`)
 
-- As mentioned [here](#-purs-checkout-widget-url), your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
+- As mentioned [**here**](#-purs-checkout-widget-url), your frontend should make a request to your backend which in turn requests the Purs backend for the checkout url.
 
 ```javascript
 const createPaymentRequest = async (amount, locationid) => {
@@ -177,7 +173,7 @@ const createPaymentRequest = async (amount, locationid) => {
         },
         body: JSON.stringify({
             amount: amount,
-            location_id: locationid
+            // other necessary parameters
         })
     });
     if (!response.ok) {
@@ -187,7 +183,7 @@ const createPaymentRequest = async (amount, locationid) => {
 }
 ```
 
-Step 6
+**Step 6**
 
 Implement the logic for a callback function (`updateUI`) to handle any UI changes after a successful payment.
 
@@ -200,11 +196,11 @@ const updateUI = () => {
 };
 ```
 
-> ⚠️ Important: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onPaymentComplete` are required.
+> ⚠️ **Important**: Both the parameters for `PursCheckoutWidget.init` i.e. `url` and `onPaymentComplete` are required.
 
 - Everything combined
 
-HTML
+**HTML**
 
 ```html
 <!DOCTYPE html>
@@ -226,7 +222,7 @@ HTML
 </html>
 ```
 
-JavaScript
+**JavaScript**
 
 ```javascript
 const updateUI = () => {
@@ -246,7 +242,7 @@ const createPaymentRequest = async (amount, locationid) => {
         },
         body: JSON.stringify({
             amount: amount,
-            location_id: locationid
+            // other necessary parameters
         })
     });
     if (!response.ok) {
@@ -281,24 +277,24 @@ const button = document.getElementById('purs-checkout-button');
 button.addEventListener('click', initiateCheckout); // call the initiateCheckout function when the button is clicked
 ```
 
-Integration steps
+**Integration steps**
 
-> Note: The naming of functions in the above code sample is for illustration purpose only. You can change it accordingly. Just make sure the core logic remains same and the `PursCheckoutWidget.init` method receives the `url` and `onPaymentComplete` parameters.
+> **Note**: The naming of functions in the above code sample is for illustration purpose only. You can change it accordingly. Just make sure the core logic remains same and the `PursCheckoutWidget.init` method receives the `url` and `onPaymentComplete` parameters.
 
 
-### Location ID of merchant
+### Location ID of merchant (Only for subscription and one-time payments)
 
 - In the Purs system, each "Merchant" can have multiple "Locations" (typically representing a physical retail location).
 - During the onboarding process, when a merchant creates an account on the Purs Merchant Portal, they are required to add at least one location. Additional locations can also be added later through the portal.
 - To retrieve all locations associated with a particular merchant, use the `/v1/merchant` endpoint. This allows you to present the available locations (and other details) related to the merchant on your platform, enabling them to choose the location where they want to receive payments from your users.
 - Once the merchant selects a location, you will use the corresponding `location_id` in the request body as outlined in the previous section.
-* Endpoint details to get the locations `/v1/merchant` - [here](#Merchant)
+- **Endpoint details to get the locations `/v1/merchant`under [Merchant API](#merchant-api)**
 
 ### Transaction Status
 
 - This is an optional but recommended step where you can make an additional API call to Purs to get the transaction status for a particular transaction.
 - The`transaction_id` received in the checkout URL [response](#post-v1transactions) will be used to retrieve the status of that transaction.
-* Endpoint details to get transaction status `/v1/transactions/{transactionId}/status` - [here](#Transaction-verification)
+- **Endpoint details to get transaction status `/v1/transactions/{transactionId}/status` under [Common Transaction APIs](#transaction-apis)**
 
 </details>
 
@@ -308,7 +304,7 @@ Integration steps
 
 ## API Endpoints
 
-<details>
+<details id="oauth">
 
 <summary><strong>OAuth APIs</strong></summary><br>
 
@@ -511,7 +507,7 @@ Integration steps
 </details>
 
 
-<details>
+<details id="merchant-api">
 
 <summary><strong>Merchant API</strong></summary><br>
 
@@ -564,7 +560,8 @@ Integration steps
 ---
 </details>
 
-<details>
+<details id="one-time-payment">
+
 <summary><strong>One-Time Transaction API</strong></summary><br>
 
 ---
@@ -613,7 +610,7 @@ Integration steps
 ---
 </details>
 
-<details>
+<details id="subscription-payment">
 
 <summary><strong>Subscription Payment APIs</strong></summary><br>
 
@@ -793,7 +790,7 @@ Integration steps
 ---
 </details>
 
-<details>
+<details id="escrow-payment">
 
 <summary><strong>Escrow Payment APIs</strong></summary><br>
 
@@ -1040,7 +1037,7 @@ Integration steps
 
 </details>
 
-<details>
+<details id="transaction-apis">
 
 <summary><strong>Common Transaction APIs</strong></summary><br>
 
@@ -1160,7 +1157,3 @@ Integration steps
         | 500 | Internal server error |
 ---
 </details>
-
-## Upcoming APIs
-
-...
