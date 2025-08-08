@@ -139,7 +139,7 @@ Implement the logic to call the `PursCheckoutWidget.init` method with `url` and 
 const initiateCheckout = async () => {
     try {
         const amount = 2000 // amount value in cents
-        const response = await createPaymentRequest(amount, 'purs-location-id');
+        const response = await createPaymentRequest(amount);
         const checkoutUrl = response
 
         //this is the main method to initiate the Purs Checkout Widget
@@ -254,7 +254,7 @@ const createPaymentRequest = async (amount, locationid) => {
 const initiateCheckout = async () => {
     try {
         const amount = 2000 // amount value in cents
-        const response = await createPaymentRequest(amount, 'purs-location-id');
+        const response = await createPaymentRequest(amount);
         const checkoutUrl = response
 
         //this is the main method to initiate the Purs Checkout Widget
