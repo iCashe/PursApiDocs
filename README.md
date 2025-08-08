@@ -282,14 +282,6 @@ button.addEventListener('click', initiateCheckout); // call the initiateCheckout
 > **Note**: The naming of functions in the above code sample is for illustration purpose only. You can change it accordingly. Just make sure the core logic remains same and the `PursCheckoutWidget.init` method receives the `url` and `onPaymentComplete` parameters.
 
 
-### Location ID of merchant (Only for subscription and one-time payments)
-
-- In the Purs system, each "Merchant" can have multiple "Locations" (typically representing a physical retail location).
-- During the onboarding process, when a merchant creates an account on the Purs Merchant Portal, they are required to add at least one location. Additional locations can also be added later through the portal.
-- To retrieve all locations associated with a particular merchant, use the `/v1/merchant` endpoint. This allows you to present the available locations (and other details) related to the merchant on your platform, enabling them to choose the location where they want to receive payments from your users.
-- Once the merchant selects a location, you will use the corresponding `location_id` in the request body as outlined in the previous section.
-- **Endpoint details to get the locations `/v1/merchant`under [Merchant API](#merchant-api)**
-
 ### Transaction Status
 
 - This is an optional but recommended step where you can make an additional API call to Purs to get the transaction status for a particular transaction.
@@ -726,18 +718,6 @@ button.addEventListener('click', initiateOnboarding); // call the initiateOnboar
             merchant: [...],
             bank_accounts: [...],
             merchant_users: [...],
-            locations: [
-                {
-                location_name: 'Test location',
-                purs_location_id: 'qwertyabcd',
-                ...
-                },
-                {
-                location_name: 'Prod location',
-                purs_location_id: 'abcdqwerty',
-                ...
-                }
-            ]
         }
         ```
 
@@ -776,7 +756,6 @@ button.addEventListener('click', initiateOnboarding); // call the initiateOnboar
         ```javascript
         {
             "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
-            "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
         }
         ```
 
@@ -827,7 +806,6 @@ button.addEventListener('click', initiateOnboarding); // call the initiateOnboar
         ```javascript
         {
             "amount": amount, // The amount in cents to be immediately paid by the user (could be 0)  (Integer)
-            "location_id": <purs_location_id>, // The ID of the merchant location where the subscription will be created (String)
             "create_subscription": true // Subscription flag
         }
         ```
