@@ -146,7 +146,8 @@ const initiateCheckout = async () => {
         PursCheckoutWidget.init({
             url: checkoutUrl&email=`user-email-id`, // email is an optional query param passed so user doesn't have to again enter their email in Purs checkout widget
             onPaymentComplete: (paymentData) => {
-                const subscription_token = paymentData?.subscriptionToken; // the subscriptionToken is an optional field returned if you pass `create_subscription`: true
+                const subscription_token = paymentData?.subscription_token; // the subscription_token is an optional field returned if you pass `create_subscription`: true
+				// const escrow_token = paymentData?.escrow_token; // the escrow_token is an optional field returned if you pass `create_escrow`: true and a `seller_id`
 
                 updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget to update any UI changes on your end.
 			}
@@ -262,7 +263,8 @@ const initiateCheckout = async () => {
             url: checkoutUrl&email=`user-email-id`, // email is an optional query param passed so user doesn't have to again enter their email in Purs checkout widget
             onPaymentComplete: (paymentData) => {
                 console.log('Payment completed!', paymentData);
-                const subscription_token = paymentData?.subscriptionToken; // the subscriptionToken is a optional field returned if you pass `create_subscription`: true
+                const subscription_token = paymentData?.subscription_token; // the subscriptionToken is a optional field returned if you pass `create_subscription`: true
+             // const escrow_token = paymentData?.escrow_token; // the escrow_token is an optional field returned if you pass `create_escrow`: true and a `seller_id`
 
                 updateUI(); // Update UI is a function that you can implement which is called when the payment is completed by the checkout widget to update any UI changes on your end.
 			}
