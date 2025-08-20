@@ -25,9 +25,7 @@ There are two primary operations that the Cann-X platform will need to support:
 
 <details><summary><h1><b>OAuth2 Flow</b></h1></summary>
 
-- This allows Cann-X to connect to Purs System. Once connected, Cann-X app can accept Purs payments on their platform. This operation only needs to be completed once for the entire Cann-X application.
-
-### **Checkout Flow**
+- The OAuth flow allows Cann-X app to connect to Purs System. Once connected, Cann-X app can accept Purs payments on their platform. This operation only needs to be completed once for the Cann-X app.
 
 - Once OAuth is successful, Cann-X app can create Purs payment requests for their customers to complete. This operation will be done each time a transaction is to be completed on the Cann-X app.
 
