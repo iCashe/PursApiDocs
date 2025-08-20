@@ -25,11 +25,11 @@ There are two primary operations that the Cann-X platform will need to support:
 
 <details><summary><h1><b>OAuth2 Flow</b></h1></summary>
 
-- This allows merchants to connect their Purs Merchant Account with Cann-X. Once connected, this merchant can accept Purs payments on the Cann-X platform. This operation only needs to be completed once for each Cann-X merchant.
+- This allows Cann-X to connect to Purs System. Once connected, Cann-X app can accept Purs payments on their platform. This operation only needs to be completed once for the entire Cann-X application.
 
 ### **Checkout Flow**
 
-- This process allows Cann-X to create Purs payment requests for Cann-X customers to complete. This operation will be done each time a transaction is to be completed on the Cann-X platform.
+- Once OAuth is successful, Cann-X app can create Purs payment requests for their customers to complete. This operation will be done each time a transaction is to be completed on the Cann-X app.
 
 ## Environment URLs
 
@@ -42,7 +42,7 @@ There are two primary operations that the Cann-X platform will need to support:
 
 ## OAuth2 Flow
 
-The process of linking a merchant account with **Purs** will ad to the standard **OAuth2** authentication protocol.
+The process of linking a Cann-X app with **Purs** will adhere to the **OAuth2** authentication protocol.
 
 ### Diagram
 
@@ -52,13 +52,12 @@ The process of linking a merchant account with **Purs** will ad to the standard 
 
 > **Note**: for **Sandbox** testing, you will need to create a dummy merchant account in the Purs **Sandbox**. Navigate to the URL listed in the Environment URLs table and create a dummy Purs merchant account.
 
-### Initiate OAuth2 Authorization
+### Initiate OAuth2 Authorization (one-time for Cann-X app)
 
 - **Endpoint details under [OAuth APIs section](#oauth)**
-- To connect a seller's Purs Merchant Account with their Cann-X seller account, Cann-X will need to have a "Connect with Purs" button (likely somew in the admin portal for your merchants).
-- When clicked, this button should navigate to the `https://{OAUTH_URL}/oauth2/authorize` URL with the appropriate query parameters.
-- The merchant will be prompted to enter their Purs Merchant Portal login credentials.
-- Once they authenticate, they will be redirected to the **REDIRECT_URL** Cann-X provided Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
+- Navigate to the `https://{OAUTH_URL}/oauth2/authorize` URL with the appropriate query parameters.
+- Login with your Purs Merchant Portal credentials.
+- Once authenticated, you will be redirected to the **REDIRECT_URL** provided to Purs. An extra query parameter will be present when the seller is redirected — a query parameter called `code`.
 - See the next section to understand what to do with the `code` that is provided by Purs as a query parameter attached to your **REDIRECT_URL**.
 
 ### Retrieve and Store Tokens
@@ -69,7 +68,7 @@ The process of linking a merchant account with **Purs** will ad to the standard 
 
 ### Refresh Tokens
 
-- Since the `access_token` and `id_token` expire, you should refresh them with `refresh_token` to make valid requests.
+- Since the `access_token` and `id_token` expire, you should refresh them with `refresh_token` to make valid requests in the future.
 
 ### Revoke Tokens
 
