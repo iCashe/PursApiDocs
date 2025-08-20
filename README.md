@@ -21,13 +21,16 @@
 
 ## Key Platform Operations
 
-There are two primary operations that the Cann-X platform will need to support:
+There are few key operations that the Cann-X platform will need to support:
+
+- The **OAuth flow** allows Cann-X app to connect to Purs System. Once connected, Cann-X app can accept Purs payments on their platform. This operation only needs to be completed **once for the Cann-X app**.
+
+- Once OAuth is successful
+	- **Onboarding Flow** allows to onboard any payee (sellers, transporters, etc.) on the Cann-X app who wishes to receive payments. This operation will be done **each time a new payee is onboarded**
+	- **Checkout Flow** allows Cann-X app to create Purs payment requests for their customers to complete. This operation will be done **each time a transaction is to be completed** on the Cann-X app.
+
 
 <details><summary><h1><b>OAuth2 Flow</b></h1></summary>
-
-- The OAuth flow allows Cann-X app to connect to Purs System. Once connected, Cann-X app can accept Purs payments on their platform. This operation only needs to be completed once for the Cann-X app.
-
-- Once OAuth is successful, Cann-X app can create Purs payment requests for their customers to complete. This operation will be done each time a transaction is to be completed on the Cann-X app.
 
 ## Environment URLs
 
@@ -38,7 +41,7 @@ There are two primary operations that the Cann-X platform will need to support:
 | **Sandbox** | `sandbox-api.purs.digital` | `sandbox-auth.purs.digital` | `sandbox-merchants.purs.digital` |
 | **Production** | `api.purs.digital` | `auth.purs.digital` | `merchants.purs.digital` |
 
-## OAuth2 Flow
+## OAuth Flow
 
 The process of linking a Cann-X app with **Purs** will adhere to the **OAuth2** authentication protocol.
 
