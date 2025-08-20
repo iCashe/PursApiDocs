@@ -45,11 +45,6 @@ There are few key operations that the Cann-X platform will need to support:
 
 The process of linking a Cann-X app with **Purs** will adhere to the **OAuth2** authentication protocol.
 
-### Diagram
-
-![OAuth Flow Diagram](https://github.com/user-attachments/assets/2b61ba33-adaf-4be3-a2bc-24ef0f61cf4e)
-
-
 
 > **Note**: for **Sandbox** testing, you will need to create a dummy merchant account in the Purs **Sandbox**. Navigate to the URL listed in the Environment URLs table and create a dummy Purs merchant account.
 
