@@ -1202,6 +1202,57 @@ button.addEventListener('click', initiateOnboarding); // call the initiateOnboar
 
 </details>
 
+<details id="payment-to-payee">
+
+<summary><strong>Payment Request to Payee</strong></summary><br>
+
+---
+* <strong>Create a payment request to payee</strong>
+    * URL
+
+        ```
+        POST https://{BASE_URL}/v1/transactions
+        ```
+
+    * Headers
+
+        ```javascript
+        {
+            "x-access-token": "<access_token>", // access_token obtained in the OAuth2 flow unique for every merchant
+            "Authorization": "Bearer <id_token>" // id_token obtained in the OAuth2 flow unique for every merchant
+        }
+        ```
+
+    * Body (JSON)
+
+        ```javascript
+        {
+            "amount": amount, // The amount in cents to be moved from buyer to seller account  (Integer)
+            "buyer_to_seller": true, // Buyer to seller flag
+            "seller_id": <seller_id> // userId generated with the onboarding flow for external merchant payee
+        }
+        ```
+
+    * Success Response
+
+        ```javascript
+        {
+            "url": "https://{CHECKOUT_URL}?tid=<transaction_id>",
+            "transaction_id": "<transaction_id>",
+        }
+        ```
+
+    * Error Responses
+
+        | `status code` | `message` |
+        | --- | --- |
+        | 400 | The amount value is not an integer, less than 0, or greater than 100000. |
+        | 401 | The bearer token is not valid. |
+        | 404 | Location not found. |
+        | 500 | Internal server error |
+---
+</details>
+
 <details id="transaction-apis">
 
 <summary><strong>Common Transaction APIs</strong></summary><br>
